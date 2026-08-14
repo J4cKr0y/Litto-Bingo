@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { genererGrille } from './litto-bingo';
 
 describe('genererGrille', () => {
