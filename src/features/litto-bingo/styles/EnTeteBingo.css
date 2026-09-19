@@ -1,0 +1,29 @@
+/* Fichier : src/features/litto-bingo/styles/EnTeteBingo.css */
+
+.en-tete-bingo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+
+  width: min(100%, 600px);
+  margin-inline: auto;
+}
+
+.en-tete-bingo__progression {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.en-tete-bingo > * {
+  min-width: 0;
+}
+
+@container (max-width: 380px) {
+  .en-tete-bingo {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+}

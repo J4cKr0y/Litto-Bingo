@@ -1,0 +1,30 @@
+/* Fichier : src/features/litto-bingo/styles/GrilleBingo.css */
+
+.grille-bingo {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(64px, 1fr));
+  gap: 0.5rem;
+
+  width: min(100%, 700px);
+  margin-inline: auto;
+
+  overflow-x: auto;
+  padding-bottom: 0.25rem; /* évite que la scrollbar ne colle aux cases */
+}
+
+.grille-bingo[data-expiree="true"] {
+  opacity: 0.6;
+}
+
+@container (max-width: 340px) {
+  .grille-bingo {
+    gap: 0.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grille-bingo {
+    width: min(100%, 780px);
+    gap: 0.75rem;
+  }
+}

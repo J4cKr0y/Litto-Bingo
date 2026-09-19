@@ -1,0 +1,109 @@
+/* Fichier : src/features/litto-bingo/styles/PageBingo.css */
+
+.page-bingo {
+  min-height: 100vh;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-bingo__entete {
+  width: min(100%, 700px);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.page-bingo__titre {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.page-bingo__sous-titre {
+  margin: 0;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+}
+
+.page-bingo__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.page-bingo__bouton-nouveau {
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.page-bingo__bouton-nouveau:hover {
+  background: color-mix(in srgb, var(--color-surface) 90%, var(--color-accent));
+}
+
+.page-bingo__bandeau {
+  width: min(100%, 600px);
+  margin-inline: auto;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.page-bingo__bandeau--succes {
+  background: color-mix(in srgb, var(--color-accent-dark) 15%, var(--color-surface));
+  border: 1px solid var(--color-accent-dark);
+  color: var(--color-accent-dark);
+}
+
+.page-bingo__bandeau--info {
+  background: color-mix(in srgb, var(--color-error) 12%, var(--color-surface));
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.page-bingo__bandeau button {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: var(--color-accent-dark);
+  color: var(--color-surface);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .page-bingo {
+    padding: 2.5rem 1.5rem 4rem;
+    gap: 2rem;
+  }
+
+  .page-bingo__titre {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-bingo {
+    padding: 3.5rem 2rem 5rem;
+    gap: 2.5rem;
+  }
+
+  .page-bingo__entete {
+    width: min(100%, 780px);
+  }
+
+  .page-bingo__titre {
+    font-size: 2.25rem;
+  }
+
+  .page-bingo__sous-titre {
+    font-size: 1rem;
+  }
+}

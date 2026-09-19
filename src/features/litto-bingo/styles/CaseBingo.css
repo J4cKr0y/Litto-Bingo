@@ -1,0 +1,69 @@
+/* Fichier : src/features/litto-bingo/styles/CaseBingo.css */
+
+.case-bingo {
+  --case-bg: var(--color-surface, #fff);
+  --case-border: var(--color-border, #d8d3c9);
+  --case-text: var(--color-text, #2b2620);
+  --case-bg-cochee: var(--color-accent-dark, #4b5f3f);
+  --case-text-cochee: var(--color-surface, #fff);
+
+  container-type: inline-size;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  padding: clamp(0.2rem, 8cqi, 0.5rem);
+
+  background: var(--case-bg);
+  color: var(--case-text);
+  border: 1px solid var(--case-border);
+  border-radius: 0.5rem;
+
+  line-height: 1.15;
+  text-align: center;
+
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, transform 100ms ease;
+}
+
+.case-bingo:hover {
+  background: color-mix(in srgb, var(--case-bg) 85%, var(--case-bg-cochee));
+}
+
+.case-bingo:focus-visible {
+  outline: 3px solid var(--color-focus, #2563eb);
+  outline-offset: 2px;
+}
+
+.case-bingo:active {
+  transform: scale(0.97);
+}
+
+.case-bingo[aria-pressed="true"] {
+  background: var(--case-bg-cochee);
+  color: var(--case-text-cochee);
+  border-color: var(--case-bg-cochee);
+}
+
+.case-bingo:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.case-bingo__consigne {
+  overflow-wrap: break-word;
+  font-size: clamp(0.7rem, 13cqi, 0.85rem);
+}
+
+.case-bingo__livre {
+  overflow-wrap: break-word;
+  font-size: clamp(0.65rem, 10cqi, 0.75rem);
+  font-style: italic;
+  opacity: 0.85;
+}

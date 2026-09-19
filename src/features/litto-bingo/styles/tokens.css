@@ -1,0 +1,24 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+
+  --color-surface: #ffffff;
+  --color-background: #f7f5f0;
+  --color-text: #2b2620;
+  --color-border: #d8d3c9;
+  --color-accent: #7a8c6f;
+  --color-accent-dark: #4b5f3f;
+  --color-error: #b3261e;
+  --color-focus: #2563eb;
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+}
