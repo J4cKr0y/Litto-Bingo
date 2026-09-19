@@ -1,0 +1,33 @@
+/* Fichier : src/features/litto-bingo/styles/CompteARebours.css */
+
+.compte-a-rebours {
+  --compte-texte: var(--color-text, #2b2620);
+  --compte-urgence: var(--color-error, #b3261e);
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--compte-texte);
+}
+
+.compte-a-rebours[data-urgence="true"] {
+  color: var(--compte-urgence);
+}
+
+.compte-a-rebours[data-expire="true"] {
+  color: var(--compte-urgence);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+@container (max-width: 140px) {
+  .compte-a-rebours {
+    font-size: 0.75rem;
+  }
+}

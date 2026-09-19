@@ -1,0 +1,54 @@
+/* Fichier : src/features/litto-bingo/styles/BarreProgression.css */
+
+.barre-progression {
+  --progression-fond: var(--color-border, #d8d3c9);
+  --progression-remplissage: var(--color-accent-dark, #4b5f3f);
+  --progression-texte: var(--color-text, #2b2620);
+
+  container-type: inline-size;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.barre-progression__texte {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--progression-texte);
+}
+
+.barre-progression__jauge {
+  width: 100%;
+  height: 0.75rem;
+  appearance: none;
+  border: none;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--progression-fond);
+}
+
+.barre-progression__jauge::-webkit-progress-bar {
+  background: var(--progression-fond);
+  border-radius: 999px;
+}
+
+.barre-progression__jauge::-webkit-progress-value {
+  background: var(--progression-remplissage);
+  border-radius: 999px;
+  transition: width 300ms ease;
+}
+
+.barre-progression__jauge::-moz-progress-bar {
+  background: var(--progression-remplissage);
+  border-radius: 999px;
+  transition: width 300ms ease;
+}
+
+/* Sur un conteneur très étroit (ex: carte compacte dans une liste d'historique), on réduit le texte */
+@container (max-width: 180px) {
+  .barre-progression__texte {
+    font-size: 0.75rem;
+  }
+}

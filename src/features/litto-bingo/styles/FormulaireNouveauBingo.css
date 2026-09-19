@@ -1,0 +1,70 @@
+/* Fichier : src/features/litto-bingo/styles/FormulaireNouveauBingo.css */
+
+.formulaire-nouveau-bingo {
+  width: min(100%, 420px);
+  margin-inline: auto;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formulaire-nouveau-bingo__titre {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.formulaire-nouveau-bingo__champ {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.formulaire-nouveau-bingo__champ label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.formulaire-nouveau-bingo__champ select,
+.formulaire-nouveau-bingo__champ input {
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.formulaire-nouveau-bingo__champ select:focus-visible,
+.formulaire-nouveau-bingo__champ input:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.formulaire-nouveau-bingo__erreur {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.formulaire-nouveau-bingo__bouton {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: var(--color-accent-dark);
+  color: var(--color-surface);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.formulaire-nouveau-bingo__bouton:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
