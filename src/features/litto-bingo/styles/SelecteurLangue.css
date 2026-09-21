@@ -1,0 +1,14 @@
+.selecteur-langue {
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.selecteur-langue:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}

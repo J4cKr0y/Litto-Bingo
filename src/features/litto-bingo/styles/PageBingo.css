@@ -6,7 +6,34 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
+
+.page-bingo::before,
+.page-bingo::after {
+  content: '';
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background-color: var(--color-accent-dark);
+  background-image: url('../assets/decor-mosaique.svg');
+  background-repeat: repeat-y;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-bingo::before {
+  left: 0;
+}
+
+.page-bingo::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+
 
 .page-bingo__entete {
   width: min(100%, 700px);
@@ -78,6 +105,19 @@
   cursor: pointer;
 }
 
+.page-bingo__barre-superieure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+}
+
+.page-bingo__barre-superieure .selecteur-langue {
+  position: absolute;
+  right: 0;
+}
+
 @media (min-width: 640px) {
   .page-bingo {
     padding: 2.5rem 1.5rem 4rem;
@@ -105,5 +145,12 @@
 
   .page-bingo__sous-titre {
     font-size: 1rem;
+  }
+}
+
+@media (min-width: 1130px) {
+  .page-bingo::before,
+  .page-bingo::after {
+    display: block;
   }
 }

@@ -1,5 +1,8 @@
 /* Fichier : src/features/litto-bingo/components/FormulaireLivre.tsx */
 import { useEffect, useId, useRef, useState } from 'react';
+import { Trans } from '@lingui/react/macro';
+import { t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import '../styles/FormulaireLivre.css';
 
 export interface FormulaireLivreProps {
@@ -25,6 +28,7 @@ export function FormulaireLivre({
   onDecocher,
   onAnnuler,
 }: FormulaireLivreProps) {
+  useLingui();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const elementDeclencheurRef = useRef<HTMLElement | null>(null);
   const [livre, setLivre] = useState('');
@@ -53,7 +57,7 @@ export function FormulaireLivre({
     const livreNettoye = livre.trim();
 
     if (livreNettoye === '') {
-      setErreur('Indique le livre associé à cette case avant de la valider');
+      setErreur(t`Indique le livre associé à cette case avant de la valider`);
       return;
     }
 
@@ -68,13 +72,15 @@ export function FormulaireLivre({
       onClose={onAnnuler}
     >
       <h2 className="formulaire-livre__titre">
-        {modeEdition ? 'Modifier cette case' : 'Valider cette case'}
+        {modeEdition ? <Trans>Modifier cette case</Trans> : <Trans>Valider cette case</Trans>}
       </h2>
       <p className="formulaire-livre__consigne">{consigneTexte}</p>
 
       <form onSubmit={gererSoumission}>
         <div className="formulaire-livre__champ">
-          <label htmlFor={champId}>Titre du livre lu</label>
+          <label htmlFor={champId}>
+            <Trans>Titre du livre lu</Trans>
+          </label>
           <input
             id={champId}
             type="text"
@@ -99,7 +105,7 @@ export function FormulaireLivre({
               className="formulaire-livre__bouton-decocher"
               onClick={onDecocher}
             >
-              Décocher
+              <Trans>Décocher</Trans>
             </button>
           )}
           <button
@@ -107,10 +113,10 @@ export function FormulaireLivre({
             className="formulaire-livre__bouton-annuler"
             onClick={onAnnuler}
           >
-            Annuler
+            <Trans>Annuler</Trans>
           </button>
           <button type="submit" className="formulaire-livre__bouton-valider">
-            {modeEdition ? 'Mettre à jour' : 'Valider'}
+            {modeEdition ? <Trans>Mettre à jour</Trans> : <Trans>Valider</Trans>}
           </button>
         </div>
       </form>

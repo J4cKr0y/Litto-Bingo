@@ -1,8 +1,12 @@
 /* Fichier : src/features/litto-bingo/components/PageBingo.tsx */
 import { useEffect, useState } from 'react';
+import { Trans } from '@lingui/react/macro';
+import { t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import { EnTeteBingo } from './EnTeteBingo';
 import { GrilleBingo } from './GrilleBingo';
 import { FormulaireNouveauBingo, type OptionsNouveauBingo } from './FormulaireNouveauBingo';
+import { BoiteSuggestion } from './BoiteSuggestion';
 import {
   genererGrille,
   definirDateDeFin,
@@ -14,6 +18,7 @@ import {
 import { LocalStorageBingoRepository, type BingoRepository } from '../litto-bingo.repository';
 import { catalogueConsignes, genresDisponibles } from '../consignes-catalogue';
 import '../styles/PageBingo.css';
+import { SelecteurLangue } from './SelecteurLangue';
 
 export interface PageBingoProps {
   /** Réservoir de consignes disponibles pour la génération */
@@ -51,6 +56,7 @@ export function PageBingo({
   consignesDisponibles = catalogueConsignes,
   repository = new LocalStorageBingoRepository(),
 }: PageBingoProps) {
+  useLingui();
   const [grille, setGrille] = useState<Grille | null>(null);
   const [chargement, setChargement] = useState(true);
   const [configurationOuverte, setConfigurationOuverte] = useState(false);
@@ -91,7 +97,7 @@ export function PageBingo({
 
     if (progressionExistante) {
       const confirme = window.confirm(
-        'Un nouveau bingo remplacera définitivement celui en cours (pas encore d\'historique). Continuer ?'
+        _(t`Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?`)
       );
       if (!confirme) return;
     }
@@ -103,7 +109,9 @@ export function PageBingo({
     return (
       <main className="page-bingo">
         <h1 className="page-bingo__titre">Litto-Bingo</h1>
-        <p role="status">Chargement de votre bingo...</p>
+        <p role="status">
+          <Trans>Chargement de votre bingo...</Trans>
+        </p>
       </main>
     );
   }
@@ -125,7 +133,7 @@ export function PageBingo({
       <main className="page-bingo">
         <h1 className="page-bingo__titre">Litto-Bingo</h1>
         <p role="alert">
-          Impossible de générer une grille : aucune consigne disponible pour ce filtre.
+          <Trans>Impossible de générer une grille : aucune consigne disponible pour ce filtre.</Trans>
         </p>
       </main>
     );
@@ -137,30 +145,39 @@ export function PageBingo({
   return (
     <main className="page-bingo">
       <header className="page-bingo__entete">
-        <h1 className="page-bingo__titre">Litto-Bingo</h1>
-        <p className="page-bingo__sous-titre">
-          Coche une case à chaque livre lu qui correspond à la consigne
-        </p>
+  <div className="page-bingo__barre-superieure">
+    <h1 className="page-bingo__titre">Litto-Bingo</h1>
+    <SelecteurLangue />
+  </div>
+  <p className="page-bingo__sous-titre">
+    <Trans>Coche une case à chaque livre lu qui correspond à la consigne</Trans>
+  </p>
         {grille.generationLimitee && (
           <p role="status" className="page-bingo__sous-titre">
-            Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible.
+            <Trans>
+              Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible.
+            </Trans>
           </p>
         )}
       </header>
 
       {complet && (
         <div className="page-bingo__bandeau page-bingo__bandeau--succes" role="status">
-          🎉 Bingo complété ! Bravo pour cette belle pile de lectures.
+          <Trans>🎉 Bingo complété ! Bravo pour cette belle pile de lectures.</Trans>
           <br />
-          <button onClick={demarrerNouveauBingo}>Commencer un nouveau bingo</button>
+          <button onClick={demarrerNouveauBingo}>
+            <Trans>Commencer un nouveau bingo</Trans>
+          </button>
         </div>
       )}
 
       {expire && (
         <div className="page-bingo__bandeau page-bingo__bandeau--info" role="status">
-          ⏳ Ce bingo est arrivé à échéance.
+          <Trans>⏳ Ce bingo est arrivé à échéance.</Trans>
           <br />
-          <button onClick={demarrerNouveauBingo}>Commencer un nouveau bingo</button>
+          <button onClick={demarrerNouveauBingo}>
+            <Trans>Commencer un nouveau bingo</Trans>
+          </button>
         </div>
       )}
 
@@ -170,10 +187,12 @@ export function PageBingo({
       {!complet && !expire && (
         <div className="page-bingo__actions">
           <button className="page-bingo__bouton-nouveau" onClick={demarrerNouveauBingo}>
-            Nouveau bingo
+            <Trans>Nouveau bingo</Trans>
           </button>
         </div>
       )}
+
+      <BoiteSuggestion />
     </main>
   );
 }

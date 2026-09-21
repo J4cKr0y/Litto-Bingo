@@ -1,0 +1,172 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-09-20 12:15+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/features/litto-bingo/components/BarreProgression.tsx:19
+msgid "{casesCochees, plural, one {# case} other {# cases}}"
+msgstr "{casesCochees, plural, one {# square} other {# squares}}"
+
+#: src/features/litto-bingo/components/CaseBingo.tsx:29
+msgid "{consigneTexte}, complétée avec {livre}"
+msgstr "{consigneTexte}, completed with {livre}"
+
+#: src/features/litto-bingo/components/CaseBingo.tsx:30
+msgid "{consigneTexte}, non complétée"
+msgstr "{consigneTexte}, not completed"
+
+#: src/features/litto-bingo/components/CompteARebours.tsx:64
+#: src/features/litto-bingo/components/CompteARebours.tsx:67
+msgid "{heures, plural, one {# heure} other {# heures}}"
+msgstr "{heures, plural, one {# hour} other {# hours}}"
+
+#: src/features/litto-bingo/components/CompteARebours.tsx:63
+msgid "{jours, plural, one {# jour} other {# jours}}"
+msgstr "{jours, plural, one {# day} other {# days}}"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:176
+msgid "⏳ Ce bingo est arrivé à échéance."
+msgstr "⏳ This bingo has expired."
+
+#: src/features/litto-bingo/components/PageBingo.tsx:166
+msgid "🎉 Bingo complété ! Bravo pour cette belle pile de lectures."
+msgstr "🎉 Bingo completed! Congratulations on this great reading stack."
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:116
+msgid "Annuler"
+msgstr "Cancel"
+
+#: src/features/litto-bingo/components/CompteARebours.tsx:57
+msgid "Bingo expiré"
+msgstr "Bingo expired"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:113
+msgid "Chargement de votre bingo..."
+msgstr "Loading your bingo..."
+
+#: src/features/litto-bingo/components/PageBingo.tsx:153
+msgid "Coche une case à chaque livre lu qui correspond à la consigne"
+msgstr "Check a square for each read book that matches the prompt"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:169
+#: src/features/litto-bingo/components/PageBingo.tsx:179
+msgid "Commencer un nouveau bingo"
+msgstr "Start a new bingo"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:60
+msgid "Créer votre bingo"
+msgstr "Create your bingo"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:79
+msgid "Date de fin (optionnelle)"
+msgstr "End date (optional)"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:108
+msgid "Décocher"
+msgstr "Uncheck"
+
+#: src/features/litto-bingo/components/BoiteSuggestion.tsx:43
+msgid "Dites-nous ce que vous en pensez..."
+msgstr "Tell us what you think about..."
+
+#: src/features/litto-bingo/components/BoiteSuggestion.tsx:20
+msgid "Écrivez votre suggestion avant de l'envoyer"
+msgstr "Write down your suggestion before sending it"
+
+#: src/features/litto-bingo/components/BoiteSuggestion.tsx:55
+msgid "Envoyer par email"
+msgstr "Send by Email"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:98
+msgid "Générer mon bingo"
+msgstr "Generate my bingo"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:65
+msgid "Genre"
+msgstr "Genre"
+
+#: src/features/litto-bingo/components/GrilleBingo.tsx:48
+msgid "Grille de bingo littéraire, 25 cases"
+msgstr "Literary bingo board, 25 squares"
+
+#: src/features/litto-bingo/components/CompteARebours.tsx:68
+msgid "Il reste {heureTexte}"
+msgstr "{heureTexte} remaining"
+
+#: src/features/litto-bingo/components/CompteARebours.tsx:65
+msgid "Il reste {jourTexte} et {heureTexte}"
+msgstr "{jourTexte} and {heureTexte} remaining"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:136
+msgid "Impossible de générer une grille : aucune consigne disponible pour ce filtre."
+msgstr "Unable to generate a board: no prompts available for this filter."
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:60
+msgid "Indique le livre associé à cette case avant de la valider"
+msgstr "Indicate the book associated with this square before validating it"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:45
+msgid "La date de fin doit être dans le futur"
+msgstr "The end date must be in the future"
+
+#: src/features/litto-bingo/components/SelecteurLangue.tsx:19
+msgid "Langue de l'interface"
+msgstr ""
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:119
+msgid "Mettre à jour"
+msgstr "Update"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:75
+msgid "Modifier cette case"
+msgstr "Edit this square"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:190
+msgid "Nouveau bingo"
+msgstr "New bingo"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:157
+msgid "Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible."
+msgstr "Few prompts available for this filter — the board has been filled as best as possible."
+
+#: src/features/litto-bingo/components/BarreProgression.tsx:30
+msgid "Progression du bingo : {casesTexte} sur {casesTotal} complétées"
+msgstr "Bingo progress: {casesTexte} of {casesTotal} completed"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:82
+msgid "Titre du livre lu"
+msgstr "Title of the read book"
+
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:68
+msgid "Tous genres"
+msgstr "All genres"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:100
+msgid "Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?"
+msgstr "A new bingo will permanently replace the current one (no history yet). Continue?"
+
+#: src/features/litto-bingo/components/BoiteSuggestion.tsx:33
+msgid "Une suggestion, un bug à signaler ?"
+msgstr "A suggestion, a bug to report?"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:119
+msgid "Valider"
+msgstr "Validate"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:75
+msgid "Valider cette case"
+msgstr "Validate this square"
+
+#: src/features/litto-bingo/components/BoiteSuggestion.tsx:37
+msgid "Votre message"
+msgstr "Your message"

@@ -1,5 +1,7 @@
 /* Fichier : src/features/litto-bingo/components/CompteARebours.tsx */
 import { useEffect, useState } from 'react';
+import { plural, t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import '../styles/CompteARebours.css';
 
 export interface CompteARebSProps {
@@ -28,6 +30,8 @@ function formaterTempsRestant(dateFin: Date, maintenant: number): string {
 }
 
 export function CompteARebours({ dateFin }: CompteARebSProps) {
+  useLingui(); // abonne le composant aux changements de langue, sans utiliser son retour
+
   const [maintenant, setMaintenant] = useState(() => Date.now());
 
   useEffect(() => {
@@ -48,6 +52,23 @@ export function CompteARebours({ dateFin }: CompteARebSProps) {
   const expire = diffMs <= 0;
   const urgence = !expire && diffMs <= SEUIL_URGENCE_MS;
 
+  let texte: string;
+  if (expire) {
+    texte = t`Bingo expiré`;
+  } else {
+    const jours = Math.floor(diffMs / UN_JOUR_MS);
+    const heures = Math.floor((diffMs % UN_JOUR_MS) / (60 * 60 * 1000));
+
+    if (jours > 0) {
+      const jourTexte = plural(jours, { one: '# jour', other: '# jours' });
+      const heureTexte = plural(heures, { one: '# heure', other: '# heures' });
+      texte = t`Il reste ${jourTexte} et ${heureTexte}`;
+    } else {
+      const heureTexte = plural(heures, { one: '# heure', other: '# heures' });
+      texte = t`Il reste ${heureTexte}`;
+    }
+  }
+
   return (
     <span
       className="compte-a-rebours"
@@ -55,7 +76,7 @@ export function CompteARebours({ dateFin }: CompteARebSProps) {
       data-expire={expire}
       aria-live="polite"
     >
-      {formaterTempsRestant(dateFin, maintenant)}
+      {texte}
     </span>
   );
 }
