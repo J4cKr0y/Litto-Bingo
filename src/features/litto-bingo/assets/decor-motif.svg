@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <path
+    d="M 250,30
+       L 290,95
+       L 328,68
+       L 282,222
+       L 368,172
+       L 370,205
+       L 424,205
+       L 338,305
+       L 348,350
+       L 256,320
+       L 256,365
+       L 244,365
+       L 244,320
+       L 152,350
+       L 162,305
+       L 76,205
+       L 130,205
+       L 132,172
+       L 218,222
+       L 172,68
+       L 210,95 Z"
+    fill="#d99a3c"
+    stroke="#a83e2c"
+    stroke-width="12"
+    stroke-linejoin="miter"
+    stroke-miterlimit="4"
+  />
+</svg>

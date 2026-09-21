@@ -1,5 +1,8 @@
 /* Fichier : src/features/litto-bingo/components/FormulaireNouveauBingo.tsx */
 import { useId, useState } from 'react';
+import { Trans } from '@lingui/react/macro';
+import { t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import '../styles/FormulaireNouveauBingo.css';
 
 export interface OptionsNouveauBingo {
@@ -22,6 +25,7 @@ export function FormulaireNouveauBingo({
   genresDisponibles,
   onValider,
 }: FormulaireNouveauBingoProps) {
+  useLingui();
   const [genre, setGenre] = useState<string>('');
   const [dateFinTexte, setDateFinTexte] = useState<string>('');
   const [erreur, setErreur] = useState<string | null>(null);
@@ -38,7 +42,7 @@ export function FormulaireNouveauBingo({
     if (dateFinTexte !== '') {
       const candidate = new Date(`${dateFinTexte}T23:59:59`);
       if (candidate.getTime() <= Date.now()) {
-        setErreur('La date de fin doit être dans le futur');
+        setErreur(t`La date de fin doit être dans le futur`);
         return;
       }
       dateFin = candidate;
@@ -52,12 +56,16 @@ export function FormulaireNouveauBingo({
 
   return (
     <form className="formulaire-nouveau-bingo" onSubmit={gererSoumission}>
-      <h2 className="formulaire-nouveau-bingo__titre">Créer votre bingo</h2>
+      <h2 className="formulaire-nouveau-bingo__titre">
+        <Trans>Créer votre bingo</Trans>
+      </h2>
 
       <div className="formulaire-nouveau-bingo__champ">
-        <label htmlFor={idGenre}>Genre</label>
+        <label htmlFor={idGenre}>
+          <Trans>Genre</Trans>
+        </label>
         <select id={idGenre} value={genre} onChange={(e) => setGenre(e.target.value)}>
-          <option value="">Tous genres</option>
+          <option value="">{t`Tous genres`}</option>
           {genresDisponibles.map((g) => (
             <option key={g} value={g}>
               {g.charAt(0).toUpperCase() + g.slice(1)}
@@ -67,15 +75,17 @@ export function FormulaireNouveauBingo({
       </div>
 
       <div className="formulaire-nouveau-bingo__champ">
-        <label htmlFor={idDate}>Date de fin (optionnelle)</label>
+        <label htmlFor={idDate}>
+          <Trans>Date de fin (optionnelle)</Trans>
+        </label>
         <input
-  id={idDate}
-  type="date"
-  min={dateMinimum}
-  value={dateFinTexte}
-  onChange={(e) => setDateFinTexte(e.target.value)}
-  onClick={(e) => e.currentTarget.showPicker?.()}
-/>
+          id={idDate}
+          type="date"
+          min={dateMinimum}
+          value={dateFinTexte}
+          onChange={(e) => setDateFinTexte(e.target.value)}
+          onClick={(e) => e.currentTarget.showPicker?.()}
+        />
       </div>
 
       {erreur && (
@@ -85,7 +95,7 @@ export function FormulaireNouveauBingo({
       )}
 
       <button type="submit" className="formulaire-nouveau-bingo__bouton">
-        Générer mon bingo
+        <Trans>Générer mon bingo</Trans>
       </button>
     </form>
   );

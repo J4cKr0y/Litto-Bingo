@@ -1,4 +1,6 @@
 /* Fichier : src/features/litto-bingo/components/CaseBingo.tsx */
+import { t } from '@lingui/core/macro';
+import { useLingui } from '@lingui/react';
 import '../styles/CaseBingo.css';
 
 export interface CaseBingoProps {
@@ -21,16 +23,18 @@ export function CaseBingo({
   disabled = false,
   onCliquer,
 }: CaseBingoProps) {
+  useLingui();
+
+const libelle = cochee
+  ? t`${consigneTexte}, complétée avec ${livre}`
+  : t`${consigneTexte}, non complétée`;
+
   return (
     <button
       type="button"
       className="case-bingo"
       aria-pressed={cochee}
-      aria-label={
-        cochee
-          ? `${consigneTexte}, complétée avec ${livre}`
-          : `${consigneTexte}, non complétée`
-      }
+      aria-label={libelle}
       disabled={disabled}
       onClick={onCliquer}
     >

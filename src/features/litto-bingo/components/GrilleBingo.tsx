@@ -4,6 +4,7 @@ import { CaseBingo } from './CaseBingo';
 import { FormulaireLivre } from './FormulaireLivre';
 import { cocherCase, decocherCase, estExpire, type Grille } from '../litto-bingo';
 import '../styles/GrilleBingo.css';
+import { t } from '@lingui/core/macro';
 
 export interface GrilleBingoProps {
   /** La grille à afficher, issue de genererGrille() */
@@ -44,7 +45,7 @@ export function GrilleBingo({ grille, onGrilleChangee }: GrilleBingoProps) {
       <div
         className="grille-bingo"
         role="group"
-        aria-label="Grille de bingo littéraire, 25 cases"
+        aria-label={t`Grille de bingo littéraire, 25 cases`}
         data-expiree={expiree}
       >
         {grille.cases.map((c, position) => (
