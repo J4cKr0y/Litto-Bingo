@@ -1,0 +1,1052 @@
+[
+  {
+    "id": "roman-01",
+    "texte": "A book with a forbidden love story",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-02",
+    "texte": "A book set in a different time period",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-03",
+    "texte": "A book with an unexpected final twist",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-04",
+    "texte": "A book written in the first person",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-05",
+    "texte": "A book with more than 400 pages",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-06",
+    "texte": "A book by a French author",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-07",
+    "texte": "A book with a predominantly blue cover",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-08",
+    "texte": "A book recommended by a friend",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-09",
+    "texte": "A book with a main character who is a doctor",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-10",
+    "texte": "A book about family",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-11",
+    "texte": "A book featuring a wedding",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-12",
+    "texte": "A book set in Paris",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-13",
+    "texte": "A book with a heroine over 50 years old",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-14",
+    "texte": "A book translated from a foreign language",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-15",
+    "texte": "A book with an important pet",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-16",
+    "texte": "A book that deals with grief",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-17",
+    "texte": "A book structured as a closed setting",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-18",
+    "texte": "A book with a three-word title",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-19",
+    "texte": "A book with multiple narrators",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-20",
+    "texte": "A book set in summer",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-21",
+    "texte": "A book with a writer as a character",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-22",
+    "texte": "A book read in less than a week",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-23",
+    "texte": "A book with a minimalist cover",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-24",
+    "texte": "A book about personal rebuilding",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-25",
+    "texte": "A book with a family secret",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-26",
+    "texte": "A book set in a small village",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-27",
+    "texte": "A book with a main character under 18",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-28",
+    "texte": "A book exploring the theme of exile",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-29",
+    "texte": "A book with an open ending",
+    "genre": "roman"
+  },
+  {
+    "id": "roman-30",
+    "texte": "A book published this year",
+    "genre": "roman"
+  },
+  {
+    "id": "policier-01",
+    "texte": "A book with a private detective",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-02",
+    "texte": "A book with a serial killer",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-03",
+    "texte": "A book set in a police station",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-04",
+    "texte": "A book with an unsolved case at the beginning",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-05",
+    "texte": "A book with a twist on the culprit's identity",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-06",
+    "texte": "A book taking place in a single night",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-07",
+    "texte": "A book featuring a trial",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-08",
+    "texte": "A book by a Scandinavian author",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-09",
+    "texte": "A book with a detailed crime scene",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-10",
+    "texte": "A book with a detective about to retire",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-11",
+    "texte": "A book with a cold case",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-12",
+    "texte": "A book set on a train",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-13",
+    "texte": "A book with an investigative journalist",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-14",
+    "texte": "A book with a collapsing alibi",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-15",
+    "texte": "A book set in a closed setting (island, manor, building)",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-16",
+    "texte": "A book where the victim is revealed in the first chapter",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-17",
+    "texte": "A book with a profiler",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-18",
+    "texte": "A book playing with multiple timelines",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-19",
+    "texte": "A book with an unexpected culprit",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-20",
+    "texte": "A book set in winter, in the cold",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-21",
+    "texte": "A book with a duo investigation",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-22",
+    "texte": "A book with a clue hidden in the title",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-23",
+    "texte": "A book inspired by a real news story",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-24",
+    "texte": "A book with an antagonist smarter than the investigator",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-25",
+    "texte": "A book translated from English",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-26",
+    "texte": "A book with an obvious red herring",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-27",
+    "texte": "A book ending with a final twist",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-28",
+    "texte": "A book with a former police officer turned civilian",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-29",
+    "texte": "A book published in hardcover (not paperback)",
+    "genre": "policier"
+  },
+  {
+    "id": "policier-30",
+    "texte": "A book with a number in the title",
+    "genre": "policier"
+  },
+  {
+    "id": "manga-01",
+    "texte": "A classic black and white manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-02",
+    "texte": "A manga with a tournament or competition",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-03",
+    "texte": "A shonen manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-04",
+    "texte": "A shojo manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-05",
+    "texte": "A manga with a supernatural power",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-06",
+    "texte": "A manga set in a high school",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-07",
+    "texte": "A manga with an antagonist who becomes an ally",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-08",
+    "texte": "A manga under 200 pages",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-09",
+    "texte": "A manga with a female lead",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-10",
+    "texte": "A manga adapted into an anime",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-11",
+    "texte": "A manga with a non-human character (robot, spirit, animal)",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-12",
+    "texte": "A manga from a genre you never usually read",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-13",
+    "texte": "A manga with a striking childhood flashback for a character",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-14",
+    "texte": "A one-shot manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-15",
+    "texte": "A manga with a romance subplot",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-16",
+    "texte": "A post-apocalyptic manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-17",
+    "texte": "A manga with a mentor for the hero",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-18",
+    "texte": "A manga about friendship",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-19",
+    "texte": "A manga with a tragic antagonist",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-20",
+    "texte": "A manga set in a fantasy world",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-21",
+    "texte": "A manga where the hero starts weak and becomes strong",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-22",
+    "texte": "A sports manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-23",
+    "texte": "A manga centered around cooking",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-24",
+    "texte": "A manga set in the future",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-25",
+    "texte": "A manga with a twist on a character's identity",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-26",
+    "texte": "A horror or psychological manga",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-27",
+    "texte": "A manga with more than 10 volumes planned",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-28",
+    "texte": "An isekai manga (transported to another world)",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-29",
+    "texte": "A manga with very detailed artwork",
+    "genre": "manga"
+  },
+  {
+    "id": "manga-30",
+    "texte": "An award-winning or cult manga",
+    "genre": "manga"
+  },
+  {
+    "id": "sfff-01",
+    "texte": "A book with a map of an imaginary world at the beginning",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-02",
+    "texte": "A book with an original magic system",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-03",
+    "texte": "A science fiction book set in space",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-04",
+    "texte": "A book with a dragon",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-05",
+    "texte": "A book with a dystopia",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-06",
+    "texte": "A book with a non-human character (elf, alien...)",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-07",
+    "texte": "The first book in a saga",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-08",
+    "texte": "A book with a prophecy",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-09",
+    "texte": "A book with time travel",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-10",
+    "texte": "A book with an artificial intelligence",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-11",
+    "texte": "A book set on another planet",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-12",
+    "texte": "A book with a post-apocalyptic world",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-13",
+    "texte": "A fantasy book written by a female author",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-14",
+    "texte": "A book with a central magical object in the plot",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-15",
+    "texte": "A book with a mythological creature",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-16",
+    "texte": "A book with multiple kingdoms or factions at war",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-17",
+    "texte": "A book with an anti-hero",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-18",
+    "texte": "A book with more than 600 pages",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-19",
+    "texte": "A book where the hero discovers their powers",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-20",
+    "texte": "A book that rewrites a fairy tale or myth",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-21",
+    "texte": "A book with a spaceship",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-22",
+    "texte": "An urban fantasy book (magic in the modern world)",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-23",
+    "texte": "A book with a collapsing empire",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-24",
+    "texte": "A book with a non-binary or queer main character",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-25",
+    "texte": "A book with a library or central place of knowledge",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-26",
+    "texte": "A book with a coming-of-age quest",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-27",
+    "texte": "A translated book from a non-English-speaking country",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-28",
+    "texte": "A book with an extreme climate (eternal winter, desert)",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-29",
+    "texte": "A book exploring an ecological theme",
+    "genre": "sfff"
+  },
+  {
+    "id": "sfff-30",
+    "texte": "A book with a heroine who wields a weapon",
+    "genre": "sfff"
+  },
+  {
+    "id": "bd-01",
+    "texte": "A classic Franco-Belgian comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-02",
+    "texte": "A black and white comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-03",
+    "texte": "An autobiographical comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-04",
+    "texte": "A comic with a journalist",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-05",
+    "texte": "A comic adapted from a novel",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-06",
+    "texte": "A historical comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-07",
+    "texte": "A comic dealing with a social issue",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-08",
+    "texte": "A one-shot comic (not a series)",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-09",
+    "texte": "A humorous comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-10",
+    "texte": "A comic with an animal character",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-11",
+    "texte": "A comic award winner at Angouleme",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-12",
+    "texte": "A comic with very colorful artwork",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-13",
+    "texte": "A reportage comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-14",
+    "texte": "A comic with a female lead",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-15",
+    "texte": "A comic set during a war",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-16",
+    "texte": "A comic with more than 200 pages",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-17",
+    "texte": "A wordless comic (no text)",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-18",
+    "texte": "A comic with a different writer and artist",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-19",
+    "texte": "A comic about ecology",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-20",
+    "texte": "A comic set in a closed setting",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-21",
+    "texte": "A children's comic",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-22",
+    "texte": "A comic with a real historical figure",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-23",
+    "texte": "A comic by an author you are discovering",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-24",
+    "texte": "A comic with a watercolor or painted style",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-25",
+    "texte": "A comic about illness or mental health",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-26",
+    "texte": "A comic with a road trip",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-27",
+    "texte": "A Franco-Belgian comic series to follow in album format",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-28",
+    "texte": "A comic with a final twist",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-29",
+    "texte": "A comic dealing with childhood",
+    "genre": "bd"
+  },
+  {
+    "id": "bd-30",
+    "texte": "A comic read in one sitting",
+    "genre": "bd"
+  },
+  {
+    "id": "romantasy-01",
+    "texte": "A romantasy with a love triangle",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-02",
+    "texte": "A romantasy with an enemy-turned-lover",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-03",
+    "texte": "A romantasy with an arranged marriage",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-04",
+    "texte": "A romantasy with a magic system tied to emotions",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-05",
+    "texte": "The first book in a romantasy saga",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-06",
+    "texte": "A romantasy with a faerie court",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-07",
+    "texte": "A romantasy with a bond of fate (soulmates)",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-08",
+    "texte": "A romantasy with a kingdom at war",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-09",
+    "texte": "A romantasy with a heroine who discovers her powers",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-10",
+    "texte": "A romantasy with a chaperone or a single bed (one bed trope)",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-11",
+    "texte": "A romantasy with a seductive antagonist",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-12",
+    "texte": "A romantasy by a female author you've never read",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-13",
+    "texte": "A romantasy with a magic academy",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-14",
+    "texte": "A romantasy with a dragon or a creature bonded to the heroine",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-15",
+    "texte": "A romantasy with a dangerous pact or bargain",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-16",
+    "texte": "A romantasy with more than 500 pages",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-17",
+    "texte": "A romantasy with a ball scene",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-18",
+    "texte": "A romantasy where the heroine travels between two worlds",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-19",
+    "texte": "A romantasy with a betrayal that upends the romance",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-20",
+    "texte": "A romantasy with a non-human main character",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-21",
+    "texte": "A romantasy with an enemies-to-lovers romance",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-22",
+    "texte": "A romantasy with a prophecy tied to the main couple",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-23",
+    "texte": "A romantasy translated from English",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-24",
+    "texte": "A romantasy with an empire or court where magic is forbidden",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-25",
+    "texte": "A romantasy with an ending that calls for a sequel",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-26",
+    "texte": "A romantasy with a toxic mentor",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-27",
+    "texte": "A romantasy with a central magical ritual or ceremony",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-28",
+    "texte": "A romantasy with a warrior heroine",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-29",
+    "texte": "A romantasy read in less than a week",
+    "genre": "romantasy"
+  },
+  {
+    "id": "romantasy-30",
+    "texte": "A romantasy with a twist on one of the lovers' identity",
+    "genre": "romantasy"
+  },
+  {
+    "id": "dark-romance-01",
+    "texte": "A dark romance with a morally grey antagonist",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-02",
+    "texte": "A dark romance with a possessiveness theme",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-03",
+    "texte": "A dark romance in a mafia setting",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-04",
+    "texte": "A dark romance with an unbalanced power dynamic",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-05",
+    "texte": "A dark romance with a kidnapping or captivity",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-06",
+    "texte": "A dark romance with blackmail at the heart of the plot",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-07",
+    "texte": "A dark romance with a family rivalry",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-08",
+    "texte": "A dark romance with an anti-hero as the love interest",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-09",
+    "texte": "A dark romance with a revenge context",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-10",
+    "texte": "A dark romance with a forced marriage",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-11",
+    "texte": "A dark romance with a twist on a character's true identity",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-12",
+    "texte": "The first book in a dark romance duology or trilogy",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-13",
+    "texte": "A dark romance with a heavy secret hidden by one of the lovers",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-14",
+    "texte": "A dark romance with an oppressive atmosphere",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-15",
+    "texte": "A dark romance with a manipulative main character",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-16",
+    "texte": "A dark romance with a toxic contract or agreement",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-17",
+    "texte": "A dark romance with an ambiguous or disturbing ending",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-18",
+    "texte": "A dark romance translated from a foreign language",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-19",
+    "texte": "A dark romance with a toxic triangle",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-20",
+    "texte": "A dark romance with a character from organized crime",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-21",
+    "texte": "A dark romance with a forbidden romance (hierarchy, status)",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-22",
+    "texte": "A dark romance with a protagonist who crosses to the dark side",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-23",
+    "texte": "A dark romance with more than 400 pages",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-24",
+    "texte": "A dark romance by a female author you are discovering",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-25",
+    "texte": "A dark romance with a central betrayal in the plot",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-26",
+    "texte": "A dark romance with a dark nocturnal or urban setting",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-27",
+    "texte": "A dark romance with a character seeking redemption",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-28",
+    "texte": "A dark romance with a psychological manipulation game",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-29",
+    "texte": "A dark romance that made you uncomfortable while reading",
+    "genre": "dark-romance"
+  },
+  {
+    "id": "dark-romance-30",
+    "texte": "A dark romance with a violent resolution",
+    "genre": "dark-romance"
+  }
+]

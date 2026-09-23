@@ -1,10 +1,21 @@
 import type { Consigne } from './litto-bingo';
-import donneesConsignes from './data/consignes.json';
+import donneesFr from './data/consignes.json';
+import donneesEn from './data/consignes_en.json';
 
-/** Catalogue complet des consignes disponibles, chargé depuis le fichier JSON. */
-export const catalogueConsignes: Consigne[] = donneesConsignes;
+const cataloguesParLangue: Record<string, Consigne[]> = {
+  fr: donneesFr,
+  en: donneesEn,
+};
 
-/** Liste des genres disponibles dans le catalogue, dérivée automatiquement (pas de duplication à maintenir à la main). */
+export function obtenirCatalogueConsignes(locale: string): Consigne[] {
+  return cataloguesParLangue[locale] ?? donneesFr;
+}
+
+/** Traduit à l'affichage le texte d'une consigne déjà générée, via son id stable. */
+export function obtenirTexteConsigneTraduit(id: string, locale: string): string | undefined {
+  return cataloguesParLangue[locale]?.find((c) => c.id === id)?.texte;
+}
+
 export const genresDisponibles: string[] = Array.from(
-  new Set(catalogueConsignes.map((c) => c.genre))
+  new Set(donneesFr.map((c) => c.genre))
 );
