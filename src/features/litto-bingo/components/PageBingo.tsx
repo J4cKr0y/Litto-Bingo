@@ -7,6 +7,7 @@ import { EnTeteBingo } from './EnTeteBingo';
 import { GrilleBingo } from './GrilleBingo';
 import { FormulaireNouveauBingo, type OptionsNouveauBingo } from './FormulaireNouveauBingo';
 import { BoiteSuggestion } from './BoiteSuggestion';
+import { SelecteurLangue } from './SelecteurLangue';
 import {
   genererGrille,
   definirDateDeFin,
@@ -16,9 +17,8 @@ import {
   type Grille,
 } from '../litto-bingo';
 import { LocalStorageBingoRepository, type BingoRepository } from '../litto-bingo.repository';
-import { catalogueConsignes, genresDisponibles } from '../consignes-catalogue';
+import { obtenirCatalogueConsignes, genresDisponibles } from '../consignes-catalogue';
 import '../styles/PageBingo.css';
-import { SelecteurLangue } from './SelecteurLangue';
 
 export interface PageBingoProps {
   /** Réservoir de consignes disponibles pour la génération */
@@ -44,8 +44,7 @@ function creerGrilleAvecOptions(
     try {
       definirDateDeFin(grille, options.dateFin);
     } catch {
-      // Filet de sécurité : le formulaire empêche déjà ce cas en amont (attribut min),
-      // on ignore silencieusement une date invalide plutôt que de planter la génération.
+      // Filet de sécurité : le formulaire empêche déjà ce cas en amont.
     }
   }
 
@@ -53,10 +52,12 @@ function creerGrilleAvecOptions(
 }
 
 export function PageBingo({
-  consignesDisponibles = catalogueConsignes,
+  consignesDisponibles,
   repository = new LocalStorageBingoRepository(),
 }: PageBingoProps) {
-  useLingui();
+  const { i18n } = useLingui();
+  const consignesActives = consignesDisponibles ?? obtenirCatalogueConsignes(i18n.locale);
+
   const [grille, setGrille] = useState<Grille | null>(null);
   const [chargement, setChargement] = useState(true);
   const [configurationOuverte, setConfigurationOuverte] = useState(false);
@@ -83,7 +84,7 @@ export function PageBingo({
   }
 
   function gererCreationBingo(options: OptionsNouveauBingo) {
-    const nouvelleGrille = creerGrilleAvecOptions(consignesDisponibles, options);
+    const nouvelleGrille = creerGrilleAvecOptions(consignesActives, options);
     setGrille(nouvelleGrille);
     setConfigurationOuverte(false);
 
@@ -97,7 +98,7 @@ export function PageBingo({
 
     if (progressionExistante) {
       const confirme = window.confirm(
-        _(t`Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?`)
+        t`Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?`
       );
       if (!confirme) return;
     }
@@ -119,7 +120,10 @@ export function PageBingo({
   if (configurationOuverte) {
     return (
       <main className="page-bingo">
-        <h1 className="page-bingo__titre">Litto-Bingo</h1>
+        <div className="page-bingo__barre-superieure">
+          <h1 className="page-bingo__titre">Litto-Bingo</h1>
+          <SelecteurLangue />
+        </div>
         <FormulaireNouveauBingo
           genresDisponibles={genresDisponibles}
           onValider={gererCreationBingo}
@@ -145,13 +149,13 @@ export function PageBingo({
   return (
     <main className="page-bingo">
       <header className="page-bingo__entete">
-  <div className="page-bingo__barre-superieure">
-    <h1 className="page-bingo__titre">Litto-Bingo</h1>
-    <SelecteurLangue />
-  </div>
-  <p className="page-bingo__sous-titre">
-    <Trans>Coche une case à chaque livre lu qui correspond à la consigne</Trans>
-  </p>
+        <div className="page-bingo__barre-superieure">
+          <h1 className="page-bingo__titre">Litto-Bingo</h1>
+          <SelecteurLangue />
+        </div>
+        <p className="page-bingo__sous-titre">
+          <Trans>Coche une case à chaque livre lu qui correspond à la consigne</Trans>
+        </p>
         {grille.generationLimitee && (
           <p role="status" className="page-bingo__sous-titre">
             <Trans>
@@ -182,7 +186,7 @@ export function PageBingo({
       )}
 
       <EnTeteBingo grille={grille} />
-      <GrilleBingo grille={grille} onGrilleChangee={gererGrilleChangee} />
+      <GrilleBingo grille={grille} locale={i18n.locale} onGrilleChangee={gererGrilleChangee} />
 
       {!complet && !expire && (
         <div className="page-bingo__actions">
