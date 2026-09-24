@@ -3,11 +3,13 @@ import { useId, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import type { TailleGrille } from '../litto-bingo';
 import '../styles/FormulaireNouveauBingo.css';
 
 export interface OptionsNouveauBingo {
   genre?: string;
   dateFin?: Date;
+  taille: TailleGrille;
 }
 
 export interface FormulaireNouveauBingoProps {
@@ -27,10 +29,12 @@ export function FormulaireNouveauBingo({
 }: FormulaireNouveauBingoProps) {
   useLingui();
   const [genre, setGenre] = useState<string>('');
+  const [taille, setTaille] = useState<TailleGrille>(5);
   const [dateFinTexte, setDateFinTexte] = useState<string>('');
   const [erreur, setErreur] = useState<string | null>(null);
 
   const idGenre = useId();
+  const idTaille = useId();
   const idDate = useId();
   const dateMinimum = demain();
 
@@ -51,6 +55,7 @@ export function FormulaireNouveauBingo({
     onValider({
       genre: genre === '' ? undefined : genre,
       dateFin,
+      taille,
     });
   }
 
@@ -59,6 +64,21 @@ export function FormulaireNouveauBingo({
       <h2 className="formulaire-nouveau-bingo__titre">
         <Trans>Créer votre bingo</Trans>
       </h2>
+
+      <div className="formulaire-nouveau-bingo__champ">
+        <label htmlFor={idTaille}>
+          <Trans>Taille de la grille</Trans>
+        </label>
+        <select
+          id={idTaille}
+          value={taille}
+          onChange={(e) => setTaille(Number(e.target.value) as TailleGrille)}
+        >
+          <option value={3}>3 × 3</option>
+          <option value={4}>4 × 4</option>
+          <option value={5}>5 × 5</option>
+        </select>
+      </div>
 
       <div className="formulaire-nouveau-bingo__champ">
         <label htmlFor={idGenre}>

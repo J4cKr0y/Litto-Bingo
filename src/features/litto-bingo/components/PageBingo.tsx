@@ -36,9 +36,9 @@ function creerGrilleAvecOptions(
   options: OptionsNouveauBingo
 ): Grille | null {
   const grille = genererGrille(
-    consignesDisponibles,
-    options.genre ? { genre: options.genre } : undefined
-  );
+  consignesDisponibles,
+  { genre: options.genre, taille: options.taille }
+);
 
   if (grille && options.dateFin) {
     try {

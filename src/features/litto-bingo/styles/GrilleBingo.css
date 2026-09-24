@@ -2,14 +2,14 @@
 
 .grille-bingo {
   display: grid;
-  grid-template-columns: repeat(5, minmax(64px, 1fr));
+  grid-template-columns: repeat(var(--taille-grille, 5), minmax(0, 1fr));
   gap: 0.5rem;
 
   width: min(100%, 700px);
   margin-inline: auto;
 
   overflow-x: auto;
-  padding-bottom: 0.25rem; /* évite que la scrollbar ne colle aux cases */
+  padding-bottom: 0.25rem;
 }
 
 .grille-bingo[data-expiree="true"] {

@@ -1,4 +1,4 @@
-import type { Grille } from './litto-bingo';
+import type { Grille, TailleGrille } from './litto-bingo';
 import type { GrillePersistee } from './litto-bingo.dto';
 
 export function versGrillePersistee(grille: Grille, idExistant?: string): GrillePersistee {
@@ -12,6 +12,7 @@ export function versGrillePersistee(grille: Grille, idExistant?: string): Grille
     })),
     generationLimitee: grille.generationLimitee,
     dateFin: grille.dateFin ? grille.dateFin.toISOString() : null,
+    taille: grille.taille,
   };
 }
 
@@ -24,5 +25,6 @@ export function versGrilleDomaine(persistee: GrillePersistee): Grille {
     })),
     generationLimitee: persistee.generationLimitee,
     dateFin: persistee.dateFin ? new Date(persistee.dateFin) : null,
+    taille: (persistee.taille as TailleGrille) ?? 5, // repli pour les bingos sauvegardés avant cette fonctionnalité
   };
 }

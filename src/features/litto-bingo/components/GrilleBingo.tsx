@@ -47,11 +47,12 @@ export function GrilleBingo({ grille, locale, onGrilleChangee }: GrilleBingoProp
   return (
     <>
       <div
-        className="grille-bingo"
-        role="group"
-        aria-label={t`Grille de bingo littéraire, 25 cases`}
-        data-expiree={expiree}
-      >
+  className="grille-bingo"
+  role="group"
+  aria-label={t`Grille de bingo littéraire, ${grille.cases.length} cases`}
+  data-expiree={expiree}
+  style={{ '--taille-grille': grille.taille } as React.CSSProperties}
+>
         {grille.cases.map((c, position) => (
           <CaseBingo
             key={c.consigne.id}
