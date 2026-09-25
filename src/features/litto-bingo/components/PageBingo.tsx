@@ -22,7 +22,7 @@ import '../styles/PageBingo.css';
 
 export interface PageBingoProps {
   /** Réservoir de consignes disponibles pour la génération */
-  consignesDisponibles: Consigne[];
+  consignesDisponibles?: Consigne[];
   /** Filtre de genre optionnel */
   genre?: string;
   /** Date de fin optionnelle */
@@ -37,7 +37,7 @@ function creerGrilleAvecOptions(
 ): Grille | null {
   const grille = genererGrille(
   consignesDisponibles,
-  { genre: options.genre, taille: options.taille }
+  { genres: options.genres, taille: options.taille }
 );
 
   if (grille && options.dateFin) {

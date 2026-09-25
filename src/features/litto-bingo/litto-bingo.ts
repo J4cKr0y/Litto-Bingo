@@ -22,7 +22,7 @@ export interface Grille {
 }
 
 export interface OptionsGeneration {
-  genre?: string;
+  genres?: string[];
   taille?: TailleGrille;
 }
 
@@ -48,8 +48,9 @@ export function genererGrille(
   const taille = options?.taille ?? TAILLE_PAR_DEFAUT;
   const nombreCases = taille * taille;
 
-  const pool = options?.genre
-    ? consignesDisponibles.filter((c) => c.genre === options.genre)
+  const pool =
+  options?.genres && options.genres.length > 0
+    ? consignesDisponibles.filter((c) => options.genres!.includes(c.genre))
     : consignesDisponibles;
 
   const consignesRetenues = melanger(pool).slice(0, nombreCases);

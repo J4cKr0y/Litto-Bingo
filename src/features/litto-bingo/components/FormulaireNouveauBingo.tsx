@@ -7,7 +7,7 @@ import type { TailleGrille } from '../litto-bingo';
 import '../styles/FormulaireNouveauBingo.css';
 
 export interface OptionsNouveauBingo {
-  genre?: string;
+  genres?: string[];
   dateFin?: Date;
   taille: TailleGrille;
 }
@@ -28,15 +28,20 @@ export function FormulaireNouveauBingo({
   onValider,
 }: FormulaireNouveauBingoProps) {
   useLingui();
-  const [genre, setGenre] = useState<string>('');
+  const [genresSelectionnes, setGenresSelectionnes] = useState<string[]>([]);
   const [taille, setTaille] = useState<TailleGrille>(5);
   const [dateFinTexte, setDateFinTexte] = useState<string>('');
   const [erreur, setErreur] = useState<string | null>(null);
 
-  const idGenre = useId();
   const idTaille = useId();
   const idDate = useId();
   const dateMinimum = demain();
+
+  function basculerGenre(genre: string) {
+    setGenresSelectionnes((prev) =>
+      prev.includes(genre) ? prev.filter((g) => g !== genre) : [...prev, genre]
+    );
+  }
 
   function gererSoumission(e: React.FormEvent) {
     e.preventDefault();
@@ -53,7 +58,7 @@ export function FormulaireNouveauBingo({
     }
 
     onValider({
-      genre: genre === '' ? undefined : genre,
+      genres: genresSelectionnes.length > 0 ? genresSelectionnes : undefined,
       dateFin,
       taille,
     });
@@ -80,19 +85,21 @@ export function FormulaireNouveauBingo({
         </select>
       </div>
 
-      <div className="formulaire-nouveau-bingo__champ">
-        <label htmlFor={idGenre}>
-          <Trans>Genre</Trans>
-        </label>
-        <select id={idGenre} value={genre} onChange={(e) => setGenre(e.target.value)}>
-          <option value="">{t`Tous genres`}</option>
-          {genresDisponibles.map((g) => (
-            <option key={g} value={g}>
-              {g.charAt(0).toUpperCase() + g.slice(1)}
-            </option>
-          ))}
-        </select>
-      </div>
+      <fieldset className="formulaire-nouveau-bingo__champ formulaire-nouveau-bingo__genres">
+        <legend>
+          <Trans>Genres (aucun coché = tous genres)</Trans>
+        </legend>
+        {genresDisponibles.map((g) => (
+          <label key={g} className="formulaire-nouveau-bingo__genre-option">
+            <input
+              type="checkbox"
+              checked={genresSelectionnes.includes(g)}
+              onChange={() => basculerGenre(g)}
+            />
+            {g.charAt(0).toUpperCase() + g.slice(1)}
+          </label>
+        ))}
+      </fieldset>
 
       <div className="formulaire-nouveau-bingo__champ">
         <label htmlFor={idDate}>

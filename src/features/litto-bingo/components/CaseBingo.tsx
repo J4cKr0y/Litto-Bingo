@@ -26,7 +26,7 @@ export function CaseBingo({
   useLingui();
 
 const libelle = cochee
-  ? t`${consigneTexte}, complétée avec ${livre}`
+  ? t`${consigneTexte}, complétée avec ${livre ?? ''}`
   : t`${consigneTexte}, non complétée`;
 
   return (
