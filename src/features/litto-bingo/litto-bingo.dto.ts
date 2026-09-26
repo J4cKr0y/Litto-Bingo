@@ -12,6 +12,7 @@ export interface GrillePersistee {
   }[];
   generationLimitee: boolean;
   dateFin: string | null; // ISO 8601, ou null si pas de date de fin
+  taille: number;
 }
 
 /** Clé fixe localStorage pour le bingo actif (MVP2 : un seul bingo suivi à la fois) */

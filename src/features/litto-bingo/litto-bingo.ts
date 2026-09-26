@@ -1,3 +1,5 @@
+// src/features/litto-bingo/litto-bingo.ts
+
 export interface Consigne {
   id: string;
   texte: string;
@@ -10,15 +12,21 @@ export interface Case {
   livre: string | null;
 }
 
+export type TailleGrille = 3 | 4 | 5;
+
 export interface Grille {
   cases: Case[];
   generationLimitee: boolean;
   dateFin: Date | null;
+  taille: TailleGrille;
 }
 
 export interface OptionsGeneration {
   genre?: string;
+  taille?: TailleGrille;
 }
+
+const TAILLE_PAR_DEFAUT: TailleGrille = 5;
 
 function melanger<T>(tableau: T[]): T[] {
   const resultat = [...tableau];
@@ -37,20 +45,20 @@ export function genererGrille(
     return null;
   }
 
+  const taille = options?.taille ?? TAILLE_PAR_DEFAUT;
+  const nombreCases = taille * taille;
+
   const pool = options?.genre
     ? consignesDisponibles.filter((c) => c.genre === options.genre)
     : consignesDisponibles;
 
-  const consignesRetenues = melanger(pool).slice(0, 25);
+  const consignesRetenues = melanger(pool).slice(0, nombreCases);
 
   return {
-    cases: consignesRetenues.map((consigne) => ({
-      consigne,
-      cochee: false,
-      livre: null,
-    })),
-    generationLimitee: consignesRetenues.length < 25,
+    cases: consignesRetenues.map((consigne) => ({ consigne, cochee: false, livre: null })),
+    generationLimitee: consignesRetenues.length < nombreCases,
     dateFin: null,
+    taille,
   };
 }
 
@@ -72,13 +80,12 @@ export function decocherCase(grille: Grille, position: number): void {
   grille.cases[position].livre = null;
 }
 
-const TAILLE_LIGNE = 5;
-
 export function verifierLigneComplete(grille: Grille, ligneIndex: number): boolean {
-  const debut = ligneIndex * TAILLE_LIGNE;
-  const casesDeLaLigne = grille.cases.slice(debut, debut + TAILLE_LIGNE);
+  const tailleLigne = grille.taille;
+  const debut = ligneIndex * tailleLigne;
+  const casesDeLaLigne = grille.cases.slice(debut, debut + tailleLigne);
 
-  return casesDeLaLigne.every((c) => c.cochee);
+  return casesDeLaLigne.length === tailleLigne && casesDeLaLigne.every((c) => c.cochee);
 }
 
 export function verifierBingoComplet(grille: Grille): boolean {
@@ -96,4 +103,3 @@ export function definirDateDeFin(grille: Grille, date: Date): void {
 export function estExpire(grille: Grille): boolean {
   return grille.dateFin !== null && grille.dateFin.getTime() < Date.now();
 }
-
