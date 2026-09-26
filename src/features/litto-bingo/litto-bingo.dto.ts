@@ -1,19 +1,16 @@
 export interface GrillePersistee {
   id: string;
-  dateCreation: string; // ISO 8601
+  dateCreation: string;
   cases: {
-    consigne: {
-      id: string;
-      texte: string;
-      genre: string;
-    };
+    consigne: { id: string; texte: string; genre: string };
     cochee: boolean;
     livre: string | null;
+    historique: { livre: string; date: string }[];
   }[];
   generationLimitee: boolean;
-  dateFin: string | null; // ISO 8601, ou null si pas de date de fin
+  dateFin: string | null;
   taille: number;
+  remplacementsRestants: number;
 }
 
-/** Clé fixe localStorage pour le bingo actif (MVP2 : un seul bingo suivi à la fois) */
 export const CLE_BINGO_ACTIF = 'litto-bingo:bingo-actif';

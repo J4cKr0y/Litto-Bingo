@@ -43,7 +43,9 @@
 
 .page-bingo__titre {
   margin: 0 0 0.25rem;
-  font-size: 1.5rem;
+  font-family: var(--font-handwriting);
+  font-size: 2.5rem;
+  font-weight: 700;
   color: var(--color-text);
 }
 
@@ -140,8 +142,8 @@
   }
 
   .page-bingo__titre {
-    font-size: 2.25rem;
-  }
+  font-size: 3.5rem;
+}
 
   .page-bingo__sous-titre {
     font-size: 1rem;

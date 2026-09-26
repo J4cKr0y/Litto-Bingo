@@ -13,6 +13,8 @@ import {
   definirDateDeFin,
   verifierBingoComplet,
   estExpire,
+  genererGrilleConservant,
+  remplacerConsigne,
   type Consigne,
   type Grille,
 } from '../litto-bingo';
@@ -22,7 +24,7 @@ import '../styles/PageBingo.css';
 
 export interface PageBingoProps {
   /** Réservoir de consignes disponibles pour la génération */
-  consignesDisponibles: Consigne[];
+  consignesDisponibles?: Consigne[];
   /** Filtre de genre optionnel */
   genre?: string;
   /** Date de fin optionnelle */
@@ -37,7 +39,7 @@ function creerGrilleAvecOptions(
 ): Grille | null {
   const grille = genererGrille(
   consignesDisponibles,
-  { genre: options.genre, taille: options.taille }
+  { genres: options.genres, taille: options.taille }
 );
 
   if (grille && options.dateFin) {
@@ -61,6 +63,37 @@ export function PageBingo({
   const [grille, setGrille] = useState<Grille | null>(null);
   const [chargement, setChargement] = useState(true);
   const [configurationOuverte, setConfigurationOuverte] = useState(false);
+  const [modeSelection, setModeSelection] = useState(false);
+  const [positionsSelectionnees, setPositionsSelectionnees] = useState<number[]>([]);
+
+function basculerSelection(position: number) {
+  setPositionsSelectionnees((prev) =>
+    prev.includes(position) ? prev.filter((p) => p !== position) : [...prev, position]
+  );
+}
+
+function annulerSelection() {
+  setModeSelection(false);
+  setPositionsSelectionnees([]);
+}
+
+function validerSelectionEtRegenerer() {
+  if (!grille) return;
+
+  const nouvelleGrille = genererGrilleConservant(
+    grille,
+    positionsSelectionnees,
+    consignesActives
+  );
+
+  setGrille(nouvelleGrille);
+  setModeSelection(false);
+  setPositionsSelectionnees([]);
+
+  if (nouvelleGrille) {
+    repository.sauvegarderBingoActif(nouvelleGrille);
+  }
+}
 
   useEffect(() => {
     let annule = false;
@@ -82,6 +115,17 @@ export function PageBingo({
     setGrille(grilleMiseAJour);
     repository.sauvegarderBingoActif(grilleMiseAJour);
   }
+  
+  function gererChangementConsigne(position: number) {
+  if (!grille) return;
+
+  try {
+    remplacerConsigne(grille, position, consignesActives);
+    gererGrilleChangee({ ...grille });
+  } catch (erreur) {
+    window.alert((erreur as Error).message);
+  }
+}
 
   function gererCreationBingo(options: OptionsNouveauBingo) {
     const nouvelleGrille = creerGrilleAvecOptions(consignesActives, options);
@@ -186,15 +230,43 @@ export function PageBingo({
       )}
 
       <EnTeteBingo grille={grille} />
-      <GrilleBingo grille={grille} locale={i18n.locale} onGrilleChangee={gererGrilleChangee} />
+      <GrilleBingo
+		grille={grille}
+		locale={i18n.locale}
+		onGrilleChangee={gererGrilleChangee}
+		modeSelection={modeSelection}
+		positionsSelectionnees={positionsSelectionnees}
+		onToggleSelection={basculerSelection}
+		onChangerConsigne={gererChangementConsigne}
+	  />
 
-      {!complet && !expire && (
-        <div className="page-bingo__actions">
-          <button className="page-bingo__bouton-nouveau" onClick={demarrerNouveauBingo}>
-            <Trans>Nouveau bingo</Trans>
-          </button>
-        </div>
-      )}
+{modeSelection && (
+  <div className="page-bingo__bandeau page-bingo__bandeau--info" role="status">
+    <Trans>Cliquez sur les cases à conserver ({positionsSelectionnees.length} sélectionnée(s))</Trans>
+    <br />
+    <button onClick={validerSelectionEtRegenerer}>
+      <Trans>Générer le nouveau bingo</Trans>
+    </button>{' '}
+    <button onClick={annulerSelection}>
+      <Trans>Annuler</Trans>
+    </button>
+  </div>
+)}		
+{!complet && !expire && !modeSelection && (
+  <div className="page-bingo__actions">
+    <button className="page-bingo__bouton-nouveau" onClick={() => setModeSelection(true)}>
+      <Trans>Garder des cases pour le prochain bingo</Trans>
+    </button>
+  </div>
+)}
+		
+      {!complet && !expire && !modeSelection && (
+  <div className="page-bingo__actions">
+    <button className="page-bingo__bouton-nouveau" onClick={demarrerNouveauBingo}>
+      <Trans>Nouveau bingo</Trans>
+    </button>
+  </div>
+)}
 
       <BoiteSuggestion />
     </main>

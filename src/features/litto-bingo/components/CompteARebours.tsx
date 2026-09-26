@@ -13,22 +13,6 @@ const UNE_MINUTE_MS = 60 * 1000;
 const UN_JOUR_MS = 24 * 60 * 60 * 1000;
 const SEUIL_URGENCE_MS = 2 * UN_JOUR_MS; // moins de 2 jours restants
 
-function formaterTempsRestant(dateFin: Date, maintenant: number): string {
-  const diffMs = dateFin.getTime() - maintenant;
-
-  if (diffMs <= 0) {
-    return 'Bingo expiré';
-  }
-
-  const jours = Math.floor(diffMs / UN_JOUR_MS);
-  const heures = Math.floor((diffMs % UN_JOUR_MS) / (60 * 60 * 1000));
-
-  if (jours > 0) {
-    return `Il reste ${jours} jour${jours > 1 ? 's' : ''} et ${heures} heure${heures > 1 ? 's' : ''}`;
-  }
-  return `Il reste ${heures} heure${heures > 1 ? 's' : ''}`;
-}
-
 export function CompteARebours({ dateFin }: CompteARebSProps) {
   useLingui(); // abonne le composant aux changements de langue, sans utiliser son retour
 

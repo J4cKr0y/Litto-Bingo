@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
+	"typecheck": "tsc --noEmit",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist", 
 	"extract": "lingui extract",

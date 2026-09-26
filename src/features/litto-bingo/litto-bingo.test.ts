@@ -84,26 +84,26 @@ describe('genererGrille', () => {
   });
   
   it('ne retient que les consignes du genre demandé quand un filtre est appliqué', () => {
-    const consignesRoman = creerConsignes('r', 'roman', 15);
-    const consignesPolicier = creerConsignes('p', 'policier', 40);
-    const pool = [...consignesRoman, ...consignesPolicier];
+  const consignesRoman = creerConsignes('r', 'roman', 15);
+  const consignesPolicier = creerConsignes('p', 'policier', 40);
+  const pool = [...consignesRoman, ...consignesPolicier];
 
-    const resultat = genererGrille(pool, { genre: 'policier' });
+  const resultat = genererGrille(pool, { genres: ['policier'] });
 
-    const genresRetournes = resultat!.cases.map((c) => c.consigne.genre);
-    expect(genresRetournes.every((g) => g === 'policier')).toBe(true);
-  });
+  const genresRetournes = resultat!.cases.map((c) => c.consigne.genre);
+  expect(genresRetournes.every((g) => g === 'policier')).toBe(true);
+});
   
   it('complète la grille avec les consignes disponibles et signale une limitation quand le genre filtré en a moins de 25', () => {
-    const consignesManga = creerConsignes('m', 'manga', 15);
-    const consignesAutres = creerConsignes('r', 'roman', 40);
-    const pool = [...consignesManga, ...consignesAutres];
+  const consignesManga = creerConsignes('m', 'manga', 15);
+  const consignesAutres = creerConsignes('r', 'roman', 40);
+  const pool = [...consignesManga, ...consignesAutres];
 
-    const resultat = genererGrille(pool, { genre: 'manga' });
+  const resultat = genererGrille(pool, { genres: ['manga'] });
 
-    expect(resultat!.cases).toHaveLength(15);
-    expect(resultat!.generationLimitee).toBe(true);
-  });
+  expect(resultat!.cases).toHaveLength(15);
+  expect(resultat!.generationLimitee).toBe(true);
+});
 });
 //-------------------------------------------------------------------------------//
 describe('cocherCase', () => {

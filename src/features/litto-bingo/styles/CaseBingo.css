@@ -67,3 +67,8 @@
   font-style: italic;
   opacity: 0.85;
 }
+
+.case-bingo[data-selectionnee="true"] {
+  outline: 3px solid var(--color-focus, #2563eb);
+  outline-offset: -3px;
+}

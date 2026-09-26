@@ -6,11 +6,19 @@ export interface Consigne {
   genre: string;
 }
 
+export interface EntreeHistorique {
+  livre: string;
+  date: string; 
+}
+
 export interface Case {
   consigne: Consigne;
   cochee: boolean;
-  livre: string | null;
+  livre: string | null; 
+  historique: EntreeHistorique[];
 }
+
+export const MAX_RELECTURES = 25;
 
 export type TailleGrille = 3 | 4 | 5;
 
@@ -19,10 +27,13 @@ export interface Grille {
   generationLimitee: boolean;
   dateFin: Date | null;
   taille: TailleGrille;
+  remplacementsRestants: number;
 }
 
+const REMPLACEMENTS_PAR_DEFAUT = 3;
+
 export interface OptionsGeneration {
-  genre?: string;
+  genres?: string[];
   taille?: TailleGrille;
 }
 
@@ -48,18 +59,74 @@ export function genererGrille(
   const taille = options?.taille ?? TAILLE_PAR_DEFAUT;
   const nombreCases = taille * taille;
 
-  const pool = options?.genre
-    ? consignesDisponibles.filter((c) => c.genre === options.genre)
+  const pool =
+  options?.genres && options.genres.length > 0
+    ? consignesDisponibles.filter((c) => options.genres!.includes(c.genre))
     : consignesDisponibles;
 
   const consignesRetenues = melanger(pool).slice(0, nombreCases);
 
   return {
-    cases: consignesRetenues.map((consigne) => ({ consigne, cochee: false, livre: null })),
-    generationLimitee: consignesRetenues.length < nombreCases,
-    dateFin: null,
-    taille,
-  };
+  cases: consignesRetenues.map((consigne) => ({
+  consigne,
+  cochee: false,
+  livre: null,
+  historique: [],
+})),
+  generationLimitee: consignesRetenues.length < nombreCases,
+  dateFin: null,
+  taille,
+  remplacementsRestants: REMPLACEMENTS_PAR_DEFAUT,
+};
+}
+
+/**
+ * Génère un nouveau bingo en conservant certaines cases (avec leur état coché/livre) d'un bingo précédent.
+ * La taille reste celle de la grille d'origine.
+ */
+export function genererGrilleConservant(
+  grilleActuelle: Grille,
+  positionsAConserver: number[],
+  consignesDisponibles: Consigne[],
+  options?: OptionsGeneration
+): Grille | null {
+  const taille = grilleActuelle.taille;
+  const nombreCases = taille * taille;
+
+  const casesConservees = positionsAConserver
+    .filter((p) => p >= 0 && p < grilleActuelle.cases.length)
+    .map((p) => grilleActuelle.cases[p]);
+
+  const idsConserves = new Set(casesConservees.map((c) => c.consigne.id));
+
+  const pool = options?.genres && options.genres.length > 0
+    ? consignesDisponibles.filter((c) => options.genres!.includes(c.genre))
+    : consignesDisponibles;
+
+  const poolSansDoublons = pool.filter((c) => !idsConserves.has(c.id));
+  const nombreAPiocher = Math.max(0, nombreCases - casesConservees.length);
+  const nouvellesConsignes = melanger(poolSansDoublons).slice(0, nombreAPiocher);
+
+  if (casesConservees.length === 0 && nouvellesConsignes.length === 0) {
+    return null;
+  }
+
+  const nouvellesCases: Case[] = nouvellesConsignes.map((consigne) => ({
+  consigne,
+  cochee: false,
+  livre: null,
+  historique: [],
+}));
+
+  const casesFinal = [...casesConservees, ...nouvellesCases];
+
+  return {
+  cases: casesFinal,
+  generationLimitee: casesFinal.length < nombreCases,
+  dateFin: null,
+  taille,
+  remplacementsRestants: REMPLACEMENTS_PAR_DEFAUT,
+};
 }
 
 export function cocherCase(grille: Grille, position: number, livre: string | null): void {
@@ -71,13 +138,71 @@ export function cocherCase(grille: Grille, position: number, livre: string | nul
     throw new Error('Indique le livre associé à cette case avant de la valider');
   }
 
-  grille.cases[position].cochee = true;
-  grille.cases[position].livre = livre;
+  const c = grille.cases[position];
+
+  if (c.historique.length >= MAX_RELECTURES) {
+    throw new Error('Limite de relectures atteinte pour cette case');
+  }
+
+  c.historique.push({ livre, date: new Date().toISOString() });
+  c.cochee = true;
+  c.livre = livre;
 }
 
 export function decocherCase(grille: Grille, position: number): void {
   grille.cases[position].cochee = false;
   grille.cases[position].livre = null;
+  grille.cases[position].historique = [];
+}
+
+export function corrigerDerniereEntree(grille: Grille, position: number, livre: string): void {
+  const c = grille.cases[position];
+
+  if (c.historique.length === 0) {
+    throw new Error('Aucune lecture à corriger pour cette case');
+  }
+
+  c.historique[c.historique.length - 1] = {
+    ...c.historique[c.historique.length - 1],
+    livre,
+  };
+  c.livre = livre;
+}
+
+/**
+ * Remplace la consigne d'une case précise par une autre, piochée aléatoirement dans le réservoir
+ * (hors doublons avec les consignes déjà présentes dans la grille).
+ * Consomme un remplacement du quota de la grille.
+ */
+export function remplacerConsigne(
+  grille: Grille,
+  position: number,
+  consignesDisponibles: Consigne[],
+  options?: OptionsGeneration
+): void {
+  if (grille.remplacementsRestants <= 0) {
+    throw new Error('Vous avez atteint la limite de remplacements pour cette grille');
+  }
+
+  if (grille.cases[position].cochee) {
+    throw new Error('Impossible de changer une case déjà cochée');
+  }
+
+  const pool = options?.genres && options.genres.length > 0
+    ? consignesDisponibles.filter((c) => options.genres!.includes(c.genre))
+    : consignesDisponibles;
+
+  const idsPresents = new Set(grille.cases.map((c) => c.consigne.id));
+  const poolSansDoublons = pool.filter((c) => !idsPresents.has(c.id));
+
+  if (poolSansDoublons.length === 0) {
+    throw new Error('Aucune consigne alternative disponible');
+  }
+
+  const nouvelleConsigne = melanger(poolSansDoublons)[0];
+
+  grille.cases[position] = { consigne: nouvelleConsigne, cochee: false, livre: null, historique: [] };
+  grille.remplacementsRestants -= 1;
 }
 
 export function verifierLigneComplete(grille: Grille, ligneIndex: number): boolean {
