@@ -1,22 +1,22 @@
 /* Fichier : src/features/litto-bingo/components/FormulaireLivre.tsx */
 import { useEffect, useId, useRef, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import { t } from '@lingui/core/macro';
+import { plural, t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
+import type { EntreeHistorique } from '../litto-bingo';
 import '../styles/FormulaireLivre.css';
 
 export interface FormulaireLivreProps {
-  /** Contrôle l'ouverture du dialog */
   ouvert: boolean;
-  /** Texte de la consigne concernée, affiché en contexte */
   consigneTexte: string;
-  /** Titre déjà associé à la case, si elle est cochée (mode édition) */
   livreInitial?: string | null;
-  /** Déclenché avec le titre du livre saisi, une fois validé */
+  historique?: EntreeHistorique[];
+  remplacementsRestants?: number;
   onValider: (livre: string) => void;
-  /** Fourni uniquement quand la case est déjà cochée, pour proposer de la dévalider */
+  onCorriger?: (livre: string) => void;
+  onAjouterLecture?: (livre: string) => void;
   onDecocher?: () => void;
-  /** Déclenché à l'annulation (Échap, clic sur backdrop, bouton Annuler) */
+  onChangerConsigne?: () => void;
   onAnnuler: () => void;
 }
 
@@ -24,8 +24,13 @@ export function FormulaireLivre({
   ouvert,
   consigneTexte,
   livreInitial = null,
+  historique = [],
+  remplacementsRestants = 0,
   onValider,
+  onCorriger,
+  onAjouterLecture,
   onDecocher,
+  onChangerConsigne,
   onAnnuler,
 }: FormulaireLivreProps) {
   useLingui();
@@ -36,6 +41,7 @@ export function FormulaireLivre({
   const champId = useId();
 
   const modeEdition = livreInitial !== null;
+  const relecturesRestantes = 25 - historique.length;
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -52,8 +58,7 @@ export function FormulaireLivre({
     }
   }, [ouvert, livreInitial]);
 
-  function gererSoumission(e: React.FormEvent) {
-    e.preventDefault();
+  function validerAvec(action: (livre: string) => void) {
     const livreNettoye = livre.trim();
 
     if (livreNettoye === '') {
@@ -61,7 +66,12 @@ export function FormulaireLivre({
       return;
     }
 
-    onValider(livreNettoye);
+    action(livreNettoye);
+  }
+
+  function gererSoumission(e: React.FormEvent) {
+    e.preventDefault();
+    validerAvec(onValider);
   }
 
   return (
@@ -75,6 +85,19 @@ export function FormulaireLivre({
         {modeEdition ? <Trans>Modifier cette case</Trans> : <Trans>Valider cette case</Trans>}
       </h2>
       <p className="formulaire-livre__consigne">{consigneTexte}</p>
+
+      {historique.length > 0 && (
+        <div className="formulaire-livre__historique">
+          <p className="formulaire-livre__historique-titre">
+            <Trans>Lectures précédentes</Trans>
+          </p>
+          <ul>
+            {historique.map((entree, index) => (
+              <li key={index}>{entree.livre}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <form onSubmit={gererSoumission}>
         <div className="formulaire-livre__champ">
@@ -98,6 +121,32 @@ export function FormulaireLivre({
           </p>
         )}
 
+        {!modeEdition && onChangerConsigne && (
+          <div className="formulaire-livre__remplacement">
+            {remplacementsRestants > 0 ? (
+              <>
+                <button
+                  type="button"
+                  className="formulaire-livre__bouton-changer"
+                  onClick={onChangerConsigne}
+                >
+                  <Trans>Changer cette consigne</Trans>
+                </button>
+                <span className="formulaire-livre__compteur">
+                  {plural(remplacementsRestants, {
+                    one: '# changement restant',
+                    other: '# changements restants',
+                  })}
+                </span>
+              </>
+            ) : (
+              <span className="formulaire-livre__compteur formulaire-livre__compteur--epuise">
+                <Trans>Limite de changements atteinte pour cette grille</Trans>
+              </span>
+            )}
+          </div>
+        )}
+
         <div className="formulaire-livre__actions">
           {modeEdition && onDecocher && (
             <button
@@ -108,16 +157,37 @@ export function FormulaireLivre({
               <Trans>Décocher</Trans>
             </button>
           )}
-          <button
-            type="button"
-            className="formulaire-livre__bouton-annuler"
-            onClick={onAnnuler}
-          >
+
+          <button type="button" className="formulaire-livre__bouton-annuler" onClick={onAnnuler}>
             <Trans>Annuler</Trans>
           </button>
-          <button type="submit" className="formulaire-livre__bouton-valider">
-            {modeEdition ? <Trans>Mettre à jour</Trans> : <Trans>Valider</Trans>}
-          </button>
+
+          {modeEdition ? (
+            <>
+              {onCorriger && (
+                <button
+                  type="button"
+                  className="formulaire-livre__bouton-valider"
+                  onClick={() => validerAvec(onCorriger)}
+                >
+                  <Trans>Corriger la dernière lecture</Trans>
+                </button>
+              )}
+              {onAjouterLecture && relecturesRestantes > 0 && (
+                <button
+                  type="button"
+                  className="formulaire-livre__bouton-valider"
+                  onClick={() => validerAvec(onAjouterLecture)}
+                >
+                  <Trans>Ajouter une nouvelle lecture</Trans> ({relecturesRestantes})
+                </button>
+              )}
+            </>
+          ) : (
+            <button type="submit" className="formulaire-livre__bouton-valider">
+              <Trans>Valider</Trans>
+            </button>
+          )}
         </div>
       </form>
     </dialog>

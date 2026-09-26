@@ -12,6 +12,7 @@ export interface CaseBingoProps {
   livre: string | null;
   /** Désactive l'interaction (ex: bingo expiré) */
   disabled?: boolean;
+  selectionnee?: boolean;
   /** Déclenché au clic sur la case */
   onCliquer: () => void;
 }
@@ -21,6 +22,7 @@ export function CaseBingo({
   cochee,
   livre,
   disabled = false,
+  selectionnee = false,
   onCliquer,
 }: CaseBingoProps) {
   useLingui();
@@ -36,12 +38,11 @@ const libelle = cochee
       aria-pressed={cochee}
       aria-label={libelle}
       disabled={disabled}
+      data-selectionnee={selectionnee}
       onClick={onCliquer}
     >
       <span className="case-bingo__consigne">{consigneTexte}</span>
-      {cochee && livre && (
-        <span className="case-bingo__livre">{livre}</span>
-      )}
+      {cochee && livre && <span className="case-bingo__livre">{livre}</span>}
     </button>
   );
 }

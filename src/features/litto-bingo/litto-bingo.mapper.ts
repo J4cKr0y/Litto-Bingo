@@ -9,10 +9,12 @@ export function versGrillePersistee(grille: Grille, idExistant?: string): Grille
       consigne: { ...c.consigne },
       cochee: c.cochee,
       livre: c.livre,
+      historique: c.historique,
     })),
     generationLimitee: grille.generationLimitee,
     dateFin: grille.dateFin ? grille.dateFin.toISOString() : null,
     taille: grille.taille,
+    remplacementsRestants: grille.remplacementsRestants,
   };
 }
 
@@ -22,9 +24,11 @@ export function versGrilleDomaine(persistee: GrillePersistee): Grille {
       consigne: { ...c.consigne },
       cochee: c.cochee,
       livre: c.livre,
+      historique: c.historique ?? (c.livre ? [{ livre: c.livre, date: persistee.dateCreation }] : []),
     })),
     generationLimitee: persistee.generationLimitee,
     dateFin: persistee.dateFin ? new Date(persistee.dateFin) : null,
-    taille: (persistee.taille as TailleGrille) ?? 5, // repli pour les bingos sauvegardés avant cette fonctionnalité
+    taille: (persistee.taille as TailleGrille) ?? 5,
+    remplacementsRestants: persistee.remplacementsRestants ?? 0,
   };
 }
