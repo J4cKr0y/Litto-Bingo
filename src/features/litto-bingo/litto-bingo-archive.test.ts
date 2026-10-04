@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { archiverBingo } from './litto-bingo-archive';
+import { archiverBingo, calculerStatistiques } from './litto-bingo-archive';
 import { genererGrille, cocherCase, enregistrerPagesLivre, type Consigne } from './litto-bingo';
 
 function creerConsignes(prefixe: string, genre: string, count = 25): Consigne[] {
@@ -137,6 +137,87 @@ describe('archiverBingo', () => {
     const archive = archiverBingo(grille, 'abandonne', debut, fin);
 
     expect(archive.casesRenouveleesUtilisees).toBe(2);
+  });
+});
+
+describe('calculerStatistiques', () => {
+  it('retourne des statistiques à zéro pour un historique vide', () => {
+    const stats = calculerStatistiques([]);
+
+    expect(stats.totalBingosCompletes).toBe(0);
+    expect(stats.totalBingosAbandonnes).toBe(0);
+    expect(stats.totalCasesCompletees).toBe(0);
+    expect(stats.totalLivresDistincts).toBe(0);
+    expect(stats.totalPagesLues).toBe(0);
+    expect(stats.totalCasesRenouvelees).toBe(0);
+    expect(stats.dureeMoyenneMs).toBeNull();
+    expect(stats.genreLePlusRapide).toBeNull();
+    expect(stats.genreLePlusLent).toBeNull();
+  });
+
+  it('compte séparément les bingos complétés et abandonnés', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    const debut = new Date('2026-01-01T00:00:00Z');
+    const fin = new Date('2026-01-02T00:00:00Z');
+
+    const archives = [
+      archiverBingo(grille, 'complete', debut, fin),
+      archiverBingo(grille, 'complete', debut, fin),
+      archiverBingo(grille, 'complete', debut, fin),
+      archiverBingo(grille, 'abandonne', debut, fin),
+      archiverBingo(grille, 'abandonne', debut, fin),
+    ];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.totalBingosCompletes).toBe(3);
+    expect(stats.totalBingosAbandonnes).toBe(2);
+  });
+  
+    it('calcule la durée moyenne en ignorant les bingos abandonnés', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    const debut = new Date('2026-01-01T00:00:00Z');
+
+    const archives = [
+      archiverBingo(grille, 'complete', debut, new Date('2026-01-03T00:00:00Z')), // 2 jours
+      archiverBingo(grille, 'complete', debut, new Date('2026-01-05T00:00:00Z')), // 4 jours
+      archiverBingo(grille, 'abandonne', debut, new Date('2026-01-10T00:00:00Z')), // dureeMs = null
+    ];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.dureeMoyenneMs).toBe(3 * 24 * 60 * 60 * 1000); // moyenne de (2+4)/2 = 3 jours
+  });
+  
+    it('identifie le genre le plus rapide et le plus lent en moyenne', () => {
+    const grillePolicier = genererGrille(creerConsignes('p', 'policier'))!;
+    const grilleSfff = genererGrille(creerConsignes('s', 'sfff'))!;
+    const debut = new Date('2026-01-01T00:00:00Z');
+
+    const archives = [
+      archiverBingo(grillePolicier, 'complete', debut, new Date('2026-01-02T00:00:00Z')), // 1 jour
+      archiverBingo(grillePolicier, 'complete', debut, new Date('2026-01-02T00:00:00Z')), // 1 jour
+      archiverBingo(grilleSfff, 'complete', debut, new Date('2026-01-06T00:00:00Z')), // 5 jours
+      archiverBingo(grilleSfff, 'complete', debut, new Date('2026-01-06T00:00:00Z')), // 5 jours
+    ];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.genreLePlusRapide).toBe('policier');
+    expect(stats.genreLePlusLent).toBe('sfff');
+  });
+  
+    it('retourne null pour genreLePlusRapide et genreLePlusLent sans aucun bingo complété', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    const debut = new Date('2026-01-01T00:00:00Z');
+    const fin = new Date('2026-01-02T00:00:00Z');
+
+    const archives = [archiverBingo(grille, 'abandonne', debut, fin)];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.genreLePlusRapide).toBeNull();
+    expect(stats.genreLePlusLent).toBeNull();
   });
   
 });

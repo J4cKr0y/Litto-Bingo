@@ -160,6 +160,10 @@ export function decocherCase(grille: Grille, position: number): void {
 }
 
 export function enregistrerPagesLivre(grille: Grille, position: number, pages: number): void {
+  if (pages <= 0) {
+    throw new Error('Indique un nombre de pages valide');
+  }
+
   const c = grille.cases[position];
   if (c.historique.length > 0) {
     c.historique[c.historique.length - 1].pages = pages;
@@ -214,6 +218,7 @@ export function remplacerConsigne(
 
   grille.cases[position] = { consigne: nouvelleConsigne, cochee: false, livre: null, historique: [] };
   grille.remplacementsRestants -= 1;
+  grille.casesRenouveleesUtilisees += 1;
 }
 
 export function verifierLigneComplete(grille: Grille, ligneIndex: number): boolean {
