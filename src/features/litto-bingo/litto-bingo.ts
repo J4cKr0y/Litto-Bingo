@@ -9,6 +9,7 @@ export interface Consigne {
 export interface EntreeHistorique {
   livre: string;
   date: string; 
+  pages: number | null;
 }
 
 export interface Case {
@@ -28,6 +29,7 @@ export interface Grille {
   dateFin: Date | null;
   taille: TailleGrille;
   remplacementsRestants: number;
+  casesRenouveleesUtilisees: number;
 }
 
 const REMPLACEMENTS_PAR_DEFAUT = 3;
@@ -77,6 +79,7 @@ export function genererGrille(
   dateFin: null,
   taille,
   remplacementsRestants: REMPLACEMENTS_PAR_DEFAUT,
+  casesRenouveleesUtilisees: 0,
 };
 }
 
@@ -126,6 +129,7 @@ export function genererGrilleConservant(
   dateFin: null,
   taille,
   remplacementsRestants: REMPLACEMENTS_PAR_DEFAUT,
+  casesRenouveleesUtilisees: 0,
 };
 }
 
@@ -144,7 +148,7 @@ export function cocherCase(grille: Grille, position: number, livre: string | nul
     throw new Error('Limite de relectures atteinte pour cette case');
   }
 
-  c.historique.push({ livre, date: new Date().toISOString() });
+  c.historique.push({ livre, date: new Date().toISOString(), pages: null });
   c.cochee = true;
   c.livre = livre;
 }
@@ -153,6 +157,13 @@ export function decocherCase(grille: Grille, position: number): void {
   grille.cases[position].cochee = false;
   grille.cases[position].livre = null;
   grille.cases[position].historique = [];
+}
+
+export function enregistrerPagesLivre(grille: Grille, position: number, pages: number): void {
+  const c = grille.cases[position];
+  if (c.historique.length > 0) {
+    c.historique[c.historique.length - 1].pages = pages;
+  }
 }
 
 export function corrigerDerniereEntree(grille: Grille, position: number, livre: string): void {
