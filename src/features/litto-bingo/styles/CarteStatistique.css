@@ -1,0 +1,26 @@
+.carte-statistique {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.carte-statistique__valeur {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-accent-dark);
+}
+
+.carte-statistique__valeur--vide {
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  font-size: 1.1rem;
+}
+
+.carte-statistique__libelle {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}

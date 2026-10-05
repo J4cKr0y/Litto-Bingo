@@ -119,13 +119,27 @@ export function calculerStatistiques(archives: BingoArchive[]): Statistiques {
     }
   }
 
+  const livresDistincts = new Set<string>();
+  let totalCasesCompletees = 0;
+  let totalPagesLues = 0;
+  let totalCasesRenouvelees = 0;
+
+  for (const archive of archives) {
+    totalCasesCompletees += archive.casesCompletees;
+    totalPagesLues += archive.pagesTotales;
+    totalCasesRenouvelees += archive.casesRenouveleesUtilisees;
+    for (const livre of archive.livresLus) {
+      livresDistincts.add(livre);
+    }
+  }
+
   return {
     totalBingosCompletes,
     totalBingosAbandonnes,
-    totalCasesCompletees: 0,
-    totalLivresDistincts: 0,
-    totalPagesLues: 0,
-    totalCasesRenouvelees: 0,
+    totalCasesCompletees,
+    totalLivresDistincts: livresDistincts.size,
+    totalPagesLues,
+    totalCasesRenouvelees,
     dureeMoyenneMs,
     genreLePlusRapide,
     genreLePlusLent,

@@ -2,7 +2,14 @@
 import { useState } from 'react';
 import { CaseBingo } from './CaseBingo';
 import { FormulaireLivre } from './FormulaireLivre';
-import { cocherCase, decocherCase, corrigerDerniereEntree, estExpire, type Grille } from '../litto-bingo';
+import {
+  cocherCase,
+  decocherCase,
+  corrigerDerniereEntree,
+  enregistrerPagesLivre,
+  estExpire,
+  type Grille,
+} from '../litto-bingo';
 import { obtenirTexteConsigneTraduit } from '../consignes-catalogue';
 import { t } from '@lingui/core/macro';
 import '../styles/GrilleBingo.css';
@@ -42,23 +49,32 @@ export function GrilleBingo({
     setPositionOuverte(position);
   }
 
-  function gererValidationLivre(livre: string) {
+  function appliquerPages(position: number, pages: number | null) {
+    if (pages !== null) {
+      enregistrerPagesLivre(grille, position, pages);
+    }
+  }
+
+  function gererValidationLivre(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     cocherCase(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }
 
-  function gererAjoutLecture(livre: string) {
+  function gererAjoutLecture(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     cocherCase(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }
 
-  function gererCorrection(livre: string) {
+  function gererCorrection(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     corrigerDerniereEntree(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }

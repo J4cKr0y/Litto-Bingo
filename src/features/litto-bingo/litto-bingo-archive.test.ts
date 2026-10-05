@@ -220,4 +220,53 @@ describe('calculerStatistiques', () => {
     expect(stats.genreLePlusLent).toBeNull();
   });
   
+    it('compte les livres distincts lus à travers toutes les archives, sans doublon', () => {
+    const grille1 = genererGrille(creerConsignes('a', 'roman'))!;
+    cocherCase(grille1, 0, 'Dune');
+    cocherCase(grille1, 1, '1984');
+
+    const grille2 = genererGrille(creerConsignes('b', 'policier'))!;
+    cocherCase(grille2, 0, 'Dune'); // relu dans un bingo différent
+    cocherCase(grille2, 1, 'Le Nom de la Rose');
+
+    const debut = new Date('2026-01-01T00:00:00Z');
+    const fin = new Date('2026-01-02T00:00:00Z');
+
+    const archives = [
+      archiverBingo(grille1, 'complete', debut, fin),
+      archiverBingo(grille2, 'complete', debut, fin),
+    ];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.totalLivresDistincts).toBe(3); // Dune, 1984, Le Nom de la Rose
+  });
+  
+    it('cumule cases complétées, pages lues et cases renouvelées sur toutes les archives', () => {
+    const grille1 = genererGrille(creerConsignes('a', 'roman'))!;
+    cocherCase(grille1, 0, 'Dune');
+    enregistrerPagesLivre(grille1, 0, 400);
+    cocherCase(grille1, 1, '1984');
+    grille1.casesRenouveleesUtilisees = 1;
+
+    const grille2 = genererGrille(creerConsignes('b', 'policier'))!;
+    cocherCase(grille2, 0, 'Le Nom de la Rose');
+    enregistrerPagesLivre(grille2, 0, 500);
+    grille2.casesRenouveleesUtilisees = 2;
+
+    const debut = new Date('2026-01-01T00:00:00Z');
+    const fin = new Date('2026-01-02T00:00:00Z');
+
+    const archives = [
+      archiverBingo(grille1, 'complete', debut, fin),
+      archiverBingo(grille2, 'complete', debut, fin),
+    ];
+
+    const stats = calculerStatistiques(archives);
+
+    expect(stats.totalCasesCompletees).toBe(3); // 2 + 1
+    expect(stats.totalPagesLues).toBe(900); // 400 + 500
+    expect(stats.totalCasesRenouvelees).toBe(3); // 1 + 2
+  });
+  
 });

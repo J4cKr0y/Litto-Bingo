@@ -1,0 +1,13 @@
+.liste-historique {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: min(100%, 780px);
+  margin-inline: auto;
+}
+
+.liste-historique__vide {
+  text-align: center;
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+  margin: 2rem auto;
+}
