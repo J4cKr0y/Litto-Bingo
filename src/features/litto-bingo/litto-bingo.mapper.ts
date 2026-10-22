@@ -1,10 +1,15 @@
+// src/features/litto-bingo/litto-bingo.mapper.ts
 import type { Grille, TailleGrille } from './litto-bingo';
 import type { GrillePersistee } from './litto-bingo.dto';
 
-export function versGrillePersistee(grille: Grille, idExistant?: string): GrillePersistee {
+export function versGrillePersistee(
+  grille: Grille,
+  idExistant?: string,
+  dateCreationExistante?: string
+): GrillePersistee {
   return {
     id: idExistant ?? crypto.randomUUID(),
-    dateCreation: new Date().toISOString(),
+    dateCreation: dateCreationExistante ?? new Date().toISOString(),
     cases: grille.cases.map((c) => ({
       consigne: { ...c.consigne },
       cochee: c.cochee,

@@ -10,11 +10,13 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-	"typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist", 
-	"extract": "lingui extract",
-	"compile": "lingui compile"
+    "deploy": "gh-pages -d dist",
+    "extract": "lingui extract",
+    "compile": "lingui compile",
+	"postinstall": "node scripts/stryker-ts6.mjs",
+    "mutation": "stryker run"
   },
   "dependencies": {
     "@lingui/core": "^6.7.0",
@@ -27,6 +29,8 @@
     "@lingui/cli": "^6.7.0",
     "@lingui/swc-plugin": "^6.7.0",
     "@lingui/vite-plugin": "^6.7.0",
+    "@stryker-mutator/core": "^10.0.0",
+    "@stryker-mutator/vitest-runner": "^10.0.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react-swc": "^4.3.3",

@@ -13,6 +13,11 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. placeholder {0}: archive.casesCompletees
+#: src/features/litto-bingo/components/LigneHistorique.tsx:32
+msgid "{0} cases complétées"
+msgstr "{0} squares completed"
+
 #: src/features/litto-bingo/components/BarreProgression.tsx:19
 msgid "{casesCochees, plural, one {# case} other {# cases}}"
 msgstr "{casesCochees, plural, one {# square} other {# squares}}"
@@ -39,54 +44,94 @@ msgstr "{heures, plural, one {# hour} other {# hours}}"
 msgid "{jours, plural, one {# jour} other {# jours}}"
 msgstr "{jours, plural, one {# day} other {# days}}"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:136
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:167
 msgid "{remplacementsRestants, plural, one {# changement restant} other {# changements restants}}"
 msgstr "{remplacementsRestants, plural, one {# change remaining} other {# changes remaining}}"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:224
+#: src/features/litto-bingo/components/PageHistorique.tsx:26
+msgid "← Retour au bingo"
+msgstr "← Back to bingo"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:264
 msgid "⏳ Ce bingo est arrivé à échéance."
 msgstr "⏳ This bingo has expired."
 
-#: src/features/litto-bingo/components/PageBingo.tsx:214
+#: src/features/litto-bingo/components/PageBingo.tsx:254
 msgid "🎉 Bingo complété ! Bravo pour cette belle pile de lectures."
 msgstr "🎉 Bingo completed! Congratulations on this great reading stack."
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:182
+#: src/features/litto-bingo/components/LigneHistorique.tsx:37
+msgid "Abandonné"
+msgstr "Abandoned"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:213
 msgid "Ajouter une nouvelle lecture"
 msgstr "Add a new reading"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:162
-#: src/features/litto-bingo/components/PageBingo.tsx:251
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:193
+#: src/features/litto-bingo/components/PageBingo.tsx:288
 msgid "Annuler"
 msgstr "Cancel"
+
+#: src/features/litto-bingo/components/ListeHistorique.tsx:19
+msgid "Aucun bingo dans votre historique pour l'instant."
+msgstr "No bingo in your history yet."
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:28
+msgid "Aucune donnée disponible pour l'instant — complétez ou abandonnez un premier bingo pour voir vos statistiques."
+msgstr "No data available yet — complete or abandon your first bingo to view your statistics."
 
 #: src/features/litto-bingo/components/CompteARebours.tsx:41
 msgid "Bingo expiré"
 msgstr "Bingo expired"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:133
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:41
+msgid "Bingos abandonnés"
+msgstr "Abandoned bingos"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:37
+msgid "Bingos réussis"
+msgstr "Successful bingos"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:45
+msgid "Cases complétées"
+msgstr "Completed squares"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:57
+msgid "Cases renouvelées"
+msgstr "Renewed squares"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:164
 msgid "Changer cette consigne"
 msgstr "Change this prompt"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:158
+#: src/features/litto-bingo/components/PageBingo.tsx:192
 msgid "Chargement de votre bingo..."
 msgstr "Loading your bingo..."
 
 #. placeholder {0}: positionsSelectionnees.length
-#: src/features/litto-bingo/components/PageBingo.tsx:245
+#: src/features/litto-bingo/components/PageBingo.tsx:282
 msgid "Cliquez sur les cases à conserver ({0} sélectionnée(s))"
 msgstr "Click on the squares to keep ({0} selected)"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:201
+#: src/features/litto-bingo/components/PageBingo.tsx:238
 msgid "Coche une case à chaque livre lu qui correspond à la consigne"
 msgstr "Check a square for each read book that matches the prompt"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:217
-#: src/features/litto-bingo/components/PageBingo.tsx:227
+#: src/features/litto-bingo/components/PageBingo.tsx:257
+#: src/features/litto-bingo/components/PageBingo.tsx:267
 msgid "Commencer un nouveau bingo"
 msgstr "Start a new bingo"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:173
+#: src/features/litto-bingo/components/LigneHistorique.tsx:37
+msgid "Complété"
+msgstr "Completed"
+
+#: src/features/litto-bingo/components/LigneHistorique.tsx:30
+msgid "complété en {duree} jours"
+msgstr "completed in {duree} days"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:204
 msgid "Corriger la dernière lecture"
 msgstr "Correct the last reading"
 
@@ -98,7 +143,7 @@ msgstr "Create your bingo"
 msgid "Date de fin (optionnelle)"
 msgstr "End date (optional)"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:157
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:188
 msgid "Décocher"
 msgstr "Uncheck"
 
@@ -114,11 +159,11 @@ msgstr "Write down your suggestion before sending it"
 msgid "Envoyer par email"
 msgstr "Send by Email"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:258
+#: src/features/litto-bingo/components/PageBingo.tsx:275
 msgid "Garder des cases pour le prochain bingo"
 msgstr "Keep squares for the next bingo"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:248
+#: src/features/litto-bingo/components/PageBingo.tsx:285
 msgid "Générer le nouveau bingo"
 msgstr "Generate the new bingo"
 
@@ -130,12 +175,20 @@ msgstr "Generate my bingo"
 #~ msgid "Genre"
 #~ msgstr "Genre"
 
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:71
+msgid "Genre le plus lent"
+msgstr "Slowest genre"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:66
+msgid "Genre le plus rapide"
+msgstr "Fastest genre"
+
 #: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:90
 msgid "Genres (aucun coché = tous genres)"
 msgstr "Genres (none checked = all genres)"
 
 #. placeholder {0}: grille.cases.length
-#: src/features/litto-bingo/components/GrilleBingo.tsx:86
+#: src/features/litto-bingo/components/GrilleBingo.tsx:102
 msgid "Grille de bingo littéraire, {0} cases"
 msgstr "Literary bingo board, {0} squares"
 
@@ -151,13 +204,21 @@ msgstr "{heureTexte} remaining"
 msgid "Il reste {jourTexte} et {heureTexte}"
 msgstr "{jourTexte} and {heureTexte} remaining"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:184
+#: src/features/litto-bingo/components/PageBingo.tsx:221
 msgid "Impossible de générer une grille : aucune consigne disponible pour ce filtre."
 msgstr "Unable to generate a board: no prompts available for this filter."
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:65
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:73
 msgid "Indique le livre associé à cette case avant de la valider"
 msgstr "Indicate the book associated with this square before validating it"
+
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:79
+msgid "Indique un nombre de pages valide"
+msgstr "Indicate a valid page count"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:61
+msgid "Jours en moyenne par bingo"
+msgstr "Average days per bingo"
 
 #: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:54
 msgid "La date de fin doit être dans le futur"
@@ -167,27 +228,48 @@ msgstr "The end date must be in the future"
 msgid "Langue de l'interface"
 msgstr "Interface language"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:92
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:106
 msgid "Lectures précédentes"
 msgstr "Previous readings"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:144
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:175
 msgid "Limite de changements atteinte pour cette grille"
 msgstr "Change limit reached for this board"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:49
+msgid "Livres distincts lus"
+msgstr "Distinct books read"
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:119
 #~ msgid "Mettre à jour"
 #~ msgstr "Update"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:85
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:99
 msgid "Modifier cette case"
 msgstr "Edit this square"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:266
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:137
+msgid "Nombre de pages (optionnel)"
+msgstr "Number of pages (optional)"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:307
 msgid "Nouveau bingo"
 msgstr "New bingo"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:205
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:53
+msgid "Pages lues"
+msgstr "Pages read"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:67
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:72
+msgid "Pas encore assez de données"
+msgstr "Not enough data yet"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:62
+msgid "Pas encore de bingo complété"
+msgstr "No completed bingo yet"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:245
 msgid "Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible."
 msgstr "Few prompts available for this filter — the board has been filled as best as possible."
 
@@ -199,29 +281,42 @@ msgstr "Bingo progress: {casesTexte} of {casesTotal} completed"
 msgid "Taille de la grille"
 msgstr "Board size"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:105
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:122
 msgid "Titre du livre lu"
 msgstr "Title of the read book"
 
-#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:68
-#~ msgid "Tous genres"
-#~ msgstr "All genres"
+#: src/features/litto-bingo/components/LigneHistorique.tsx:20
+msgid "Tous genres"
+msgstr "All genres"
 
 #: src/features/litto-bingo/components/PageBingo.tsx:145
-msgid "Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?"
-msgstr "A new bingo will permanently replace the current one (no history yet). Continue?"
+#~ msgid "Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?"
+#~ msgstr "A new bingo will permanently replace the current one (no history yet). Continue?"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:124
+msgid "Un nouveau bingo remplacera définitivement celui en cours. Il sera archivé comme abandonné. Continuer ?"
+msgstr "A new bingo will permanently replace the current one. It will be archived as abandoned. Continue?"
 
 #: src/features/litto-bingo/components/BoiteSuggestion.tsx:33
 msgid "Une suggestion, un bug à signaler ?"
 msgstr "A suggestion, a bug to report?"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:188
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:219
 msgid "Valider"
 msgstr "Validate"
 
-#: src/features/litto-bingo/components/FormulaireLivre.tsx:85
+#: src/features/litto-bingo/components/FormulaireLivre.tsx:99
 msgid "Valider cette case"
 msgstr "Validate this square"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:206
+#: src/features/litto-bingo/components/PageBingo.tsx:241
+msgid "Voir mon historique"
+msgstr "View my history"
+
+#: src/features/litto-bingo/components/PageHistorique.tsx:22
+msgid "Votre historique de lecture"
+msgstr "Your reading history"
 
 #: src/features/litto-bingo/components/BoiteSuggestion.tsx:37
 msgid "Votre message"

@@ -1,52 +1,47 @@
+// Fichier : src/features/litto-bingo/litto-bingo.repository.ts
+
 import type { Grille } from './litto-bingo';
 import type { GrillePersistee } from './litto-bingo.dto';
 import { CLE_BINGO_ACTIF } from './litto-bingo.dto';
 import { versGrillePersistee, versGrilleDomaine } from './litto-bingo.mapper';
 
-/**
- * Port (interface) définissant le contrat de persistance pour l'Agrégat Bingo.
- * Le domaine ne connaît que cette interface, jamais son implémentation concrète —
- * ce qui permettra de remplacer localStorage par un vrai backend (MVP3) sans
- * toucher à la logique métier ni aux composants UI.
- */
 export interface BingoRepository {
-  sauvegarderBingoActif(grille: Grille): Promise<void>;
+  sauvegarderBingoActif(grille: Grille, dateDebut?: Date): Promise<void>;
   chargerBingoActif(): Promise<Grille | null>;
+  obtenirDateDebutBingoActif(): Promise<Date | null>;
   supprimerBingoActif(): Promise<void>;
 }
 
-/**
- * Adapter : implémentation concrète du BingoRepository via localStorage.
- * Toute la connaissance de l'API localStorage et du format JSON est
- * encapsulée ici — le reste de l'application ne manipule que l'interface.
- */
 export class LocalStorageBingoRepository implements BingoRepository {
-  async sauvegarderBingoActif(grille: Grille): Promise<void> {
-    const idExistant = this.lireIdExistant();
-    const persistee = versGrillePersistee(grille, idExistant ?? undefined);
+  async sauvegarderBingoActif(grille: Grille, dateDebut?: Date): Promise<void> {
+    const existant = this.lirePersisteBrut();
+    const persistee = versGrillePersistee(
+      grille,
+      existant?.id,
+      dateDebut?.toISOString() ?? existant?.dateCreation
+    );
 
     localStorage.setItem(CLE_BINGO_ACTIF, JSON.stringify(persistee));
   }
 
   async chargerBingoActif(): Promise<Grille | null> {
-    const brut = localStorage.getItem(CLE_BINGO_ACTIF);
-    if (brut === null) {
-      return null;
-    }
-
-    const persistee: GrillePersistee = JSON.parse(brut);
+    const persistee = this.lirePersisteBrut();
+    if (persistee === null) return null;
     return versGrilleDomaine(persistee);
+  }
+
+  async obtenirDateDebutBingoActif(): Promise<Date | null> {
+    const persistee = this.lirePersisteBrut();
+    if (persistee === null) return null;
+    return new Date(persistee.dateCreation);
   }
 
   async supprimerBingoActif(): Promise<void> {
     localStorage.removeItem(CLE_BINGO_ACTIF);
   }
 
-  private lireIdExistant(): string | null {
+  private lirePersisteBrut(): GrillePersistee | null {
     const brut = localStorage.getItem(CLE_BINGO_ACTIF);
-    if (brut === null) return null;
-
-    const persistee: GrillePersistee = JSON.parse(brut);
-    return persistee.id;
+    return brut === null ? null : JSON.parse(brut);
   }
 }

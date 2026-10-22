@@ -12,6 +12,7 @@ export interface BingoArchive {
   pagesTotales: number;
   dureeMs: number | null;
   casesRenouveleesUtilisees: number;
+  dateArchivage: string; 
 }
 
 function calculerDuree(
@@ -29,10 +30,11 @@ export function archiverBingo(
   grille: Grille,
   statut: StatutArchive,
   dateDebut: Date,
-  dateFinArchivage: Date
+  dateFinArchivage: Date,
 ): BingoArchive {
   const genres = Array.from(new Set(grille.cases.map((c) => c.consigne.genre)));
   const casesCompletees = grille.cases.filter((c) => c.cochee).length;
+  
 
   const livresLus = new Set<string>();
   let pagesTotales = 0;
@@ -56,6 +58,7 @@ export function archiverBingo(
     pagesTotales,
     dureeMs: calculerDuree(statut, dateDebut, dateFinArchivage),
     casesRenouveleesUtilisees: grille.casesRenouveleesUtilisees,
+	dateArchivage: dateFinArchivage.toISOString(),
   };
 }
 

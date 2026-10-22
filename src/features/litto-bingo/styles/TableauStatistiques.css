@@ -1,0 +1,22 @@
+.tableau-statistiques {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  width: min(100%, 780px);
+  margin-inline: auto;
+}
+
+.tableau-statistiques__section-titre {
+  grid-column: 1 / -1;
+  margin: 1rem 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.tableau-statistiques__vide {
+  width: min(100%, 780px);
+  margin: 2rem auto;
+  text-align: center;
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+}
