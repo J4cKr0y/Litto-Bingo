@@ -770,6 +770,11 @@ describe("occurrences de saison : l'hiver enjambe deux années civiles", () => {
       marathonHivernalDebloquePour(['2028-01-10T12:00:00.000Z', '2028-12-25T12:00:00.000Z'])
     ).toEqual([]);
   });
+    it("rattache le dernier jour de l'hiver (19 mars) à l'hiver commencé l'année précédente", () => {
+    expect(
+      marathonHivernalDebloquePour(['2027-12-25T12:00:00.000Z', '2028-03-19T12:00:00.000Z'])
+    ).toEqual([{ id: 'marathon-hivernal', notifie: false }]);
+  });
 });
 
 describe('occurrences de saison : Explorateur brumeux (3 genres distincts dans la même saison)', () => {

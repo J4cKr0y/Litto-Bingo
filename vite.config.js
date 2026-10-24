@@ -10,4 +10,11 @@ export default defineConfig({
     lingui(),
   ],
   base: '/Litto-Bingo/',
+  test: {
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.stryker-tmp/**',
+    ],
+  },
 });
