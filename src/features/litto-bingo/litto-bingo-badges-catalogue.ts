@@ -76,3 +76,5 @@ export function construireCatalogue(
     ...construireBadgesPionnier(anneeCourante),
   ];
 }
+
+export const DATE_ACTIVATION_BADGES = new Date('2026-10-24T00:00:00Z');

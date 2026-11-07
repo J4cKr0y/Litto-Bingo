@@ -1,7 +1,13 @@
 {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
   "testRunner": "vitest",
-  "mutate": ["src/features/litto-bingo/litto-bingo-badges.ts"],
+  "mutate": [
+    "src/features/litto-bingo/litto-bingo-badges.ts",
+    "src/features/litto-bingo/litto-bingo-badges-catalogue.ts",
+    "src/features/litto-bingo/litto-bingo-badges.repository.ts",
+    "src/features/litto-bingo/litto-bingo-texte.ts",
+    "src/features/litto-bingo/litto-bingo-badges-export.ts"
+  ],
   "coverageAnalysis": "perTest",
   "reporters": ["clear-text", "html"],
   "thresholds": { "high": 90, "low": 75, "break": null }

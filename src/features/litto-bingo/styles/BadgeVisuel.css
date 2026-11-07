@@ -1,0 +1,13 @@
+/* Fichier : src/features/litto-bingo/styles/BadgeVisuel.css */
+
+.badge-visuel {
+  display: block;
+  inline-size: var(--badge-taille, 5rem);
+  block-size: auto;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.badge-visuel[data-etat='debloque'] {
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 0.25));
+}

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { DefinitionBadge } from './litto-bingo-badges';
-import { construireCatalogue } from './litto-bingo-badges-catalogue';
+import { construireCatalogue, DATE_ACTIVATION_BADGES } from './litto-bingo-badges-catalogue';
 
 describe('construireCatalogue', () => {
   it("contient un badge Pionnier par année, de 2027 jusqu'à l'année courante incluse", () => {
@@ -101,5 +101,26 @@ describe('construireCatalogue : structure', () => {
 
     expect(ids.indexOf('sans-filet')).toBeLessThan(ids.indexOf('bourgeon'));
     expect(ids.indexOf('flocon-d-or')).toBeLessThan(ids.indexOf('pionnier-2027'));
+  });
+});
+
+describe('construireCatalogue : définition des badges Pionnier', () => {
+  it("définit Pionnier comme un bingo complété dans l'année civile correspondante", () => {
+    const catalogue = construireCatalogue(2028, ['roman']);
+
+    expect(catalogue.find((badge) => badge.id === 'pionnier-2028')).toEqual({
+      id: 'pionnier-2028',
+      type: 'quantitatif',
+      champ: 'bingosCompletes',
+      seuil: 1,
+      fenetre: { type: 'anneeCivile', annee: 2028 },
+    });
+  });
+});
+
+describe('DATE_ACTIVATION_BADGES', () => {
+  it('est une date valide, à minuit UTC', () => {
+    expect(Number.isNaN(DATE_ACTIVATION_BADGES.getTime())).toBe(false);
+    expect(DATE_ACTIVATION_BADGES.toISOString().endsWith('T00:00:00.000Z')).toBe(true);
   });
 });
