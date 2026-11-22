@@ -1,0 +1,74 @@
+/* Fichier : src/features/litto-bingo/styles/ModaleLivresLus.css */
+
+.modale-livres {
+  inline-size: min(100% - 2rem, 40rem);
+  max-block-size: min(90dvh, 48rem);
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-background);
+  color: var(--color-text);
+  color-scheme: light;
+}
+
+.modale-livres[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.modale-livres::backdrop {
+  background: rgb(0 0 0 / 0.5);
+}
+
+/* La page derrière ne défile pas pendant que la modale est ouverte. */
+body:has(.modale-livres[open]) {
+  overflow: hidden;
+}
+
+.modale-livres__conteneur {
+  display: flex;
+  flex-direction: column;
+  min-block-size: 0;
+}
+
+.modale-livres__entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1rem 0.75rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.modale-livres__titre {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--color-text);
+}
+
+.modale-livres__fermer {
+  flex-shrink: 0;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.modale-livres__fermer:hover {
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-surface));
+}
+
+.modale-livres__fermer:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.modale-livres__corps {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem;
+}

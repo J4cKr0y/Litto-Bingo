@@ -1,0 +1,43 @@
+/* Fichier : src/features/litto-bingo/styles/ListeBadges.css */
+
+.liste-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.liste-badges__resume {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.liste-badges__vide {
+  margin: 0;
+  padding: 1rem;
+  border: 1px dashed var(--color-border);
+  border-radius: 0.75rem;
+  color: var(--color-text);
+}
+
+.liste-badges__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.liste-badges__titre {
+  margin: 0;
+  font-size: 1.125rem;
+  color: var(--color-text);
+}
+
+.liste-badges__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

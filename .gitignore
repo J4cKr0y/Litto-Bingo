@@ -46,6 +46,9 @@ build/
 .env.production.local
 coverage/
 .cache/
+.stryker-ts-tmp/
+.stryker-tmp/
+reports/
 
 # PHP
 vendor/

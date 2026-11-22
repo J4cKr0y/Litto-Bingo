@@ -12,9 +12,9 @@ export interface FormulaireLivreProps {
   livreInitial?: string | null;
   historique?: EntreeHistorique[];
   remplacementsRestants?: number;
-  onValider: (livre: string) => void;
-  onCorriger?: (livre: string) => void;
-  onAjouterLecture?: (livre: string) => void;
+  onValider: (livre: string, pages: number | null) => void;
+  onCorriger?: (livre: string, pages: number | null) => void;
+  onAjouterLecture?: (livre: string, pages: number | null) => void;
   onDecocher?: () => void;
   onChangerConsigne?: () => void;
   onAnnuler: () => void;
@@ -37,8 +37,10 @@ export function FormulaireLivre({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const elementDeclencheurRef = useRef<HTMLElement | null>(null);
   const [livre, setLivre] = useState('');
+  const [pages, setPages] = useState('');
   const [erreur, setErreur] = useState<string | null>(null);
   const champId = useId();
+  const champPagesId = useId();
 
   const modeEdition = livreInitial !== null;
   const relecturesRestantes = 25 - historique.length;
@@ -50,6 +52,7 @@ export function FormulaireLivre({
     if (ouvert && !dialog.open) {
       elementDeclencheurRef.current = document.activeElement as HTMLElement;
       setLivre(livreInitial ?? '');
+      setPages('');
       setErreur(null);
       dialog.showModal();
     } else if (!ouvert && dialog.open) {
@@ -58,7 +61,12 @@ export function FormulaireLivre({
     }
   }, [ouvert, livreInitial]);
 
-  function validerAvec(action: (livre: string) => void) {
+  function pagesEnNombre(): number | null {
+    if (pages.trim() === '') return null;
+    return Number(pages);
+  }
+
+  function validerAvec(action: (livre: string, pages: number | null) => void) {
     const livreNettoye = livre.trim();
 
     if (livreNettoye === '') {
@@ -66,7 +74,13 @@ export function FormulaireLivre({
       return;
     }
 
-    action(livreNettoye);
+    const pagesNombre = pagesEnNombre();
+    if (pages.trim() !== '' && (pagesNombre === null || pagesNombre <= 0 || !Number.isInteger(pagesNombre))) {
+      setErreur(t`Indique un nombre de pages valide`);
+      return;
+    }
+
+    action(livreNettoye, pagesNombre);
   }
 
   function gererSoumission(e: React.FormEvent) {
@@ -93,7 +107,10 @@ export function FormulaireLivre({
           </p>
           <ul>
             {historique.map((entree, index) => (
-              <li key={index}>{entree.livre}</li>
+              <li key={index}>
+                {entree.livre}
+                {entree.pages !== null && ` — ${entree.pages}p`}
+              </li>
             ))}
           </ul>
         </div>
@@ -112,6 +129,20 @@ export function FormulaireLivre({
             aria-invalid={erreur !== null}
             aria-describedby={erreur ? `${champId}-erreur` : undefined}
             autoFocus
+          />
+        </div>
+
+        <div className="formulaire-livre__champ">
+          <label htmlFor={champPagesId}>
+            <Trans>Nombre de pages (optionnel)</Trans>
+          </label>
+          <input
+            id={champPagesId}
+            type="number"
+            min={1}
+            step={1}
+            value={pages}
+            onChange={(e) => setPages(e.target.value)}
           />
         </div>
 

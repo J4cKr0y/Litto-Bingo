@@ -1,0 +1,109 @@
+/* Fichier : src/features/litto-bingo/styles/CarteBadge.css */
+
+.carte-badge {
+  container-type: inline-size;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-surface);
+}
+
+.carte-badge[data-etat='verrouille'] {
+  border-style: dashed;
+}
+
+.carte-badge__corps {
+  display: grid;
+  justify-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.carte-badge__sceau {
+  --badge-taille: 5rem;
+}
+
+.carte-badge__contenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.carte-badge__nom {
+  margin: 0;
+  font-size: 1.0625rem;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.carte-badge__statut {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.carte-badge__statut[data-etat='debloque'] {
+  color: var(--color-accent-dark);
+}
+
+.carte-badge__description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.carte-badge__progression-texte {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.carte-badge__progression {
+  inline-size: 100%;
+  block-size: 0.625rem;
+  accent-color: var(--color-accent-dark);
+}
+
+.carte-badge__bouton {
+  align-self: center;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-accent-dark);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-accent-dark);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.carte-badge__bouton:hover {
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-surface));
+}
+
+.carte-badge__bouton:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.carte-badge__erreur {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-error);
+}
+
+@container (min-width: 20rem) {
+  .carte-badge__corps {
+    grid-template-columns: auto 1fr;
+    justify-items: start;
+    align-items: center;
+    text-align: start;
+  }
+
+  .carte-badge__bouton {
+    align-self: start;
+  }
+}

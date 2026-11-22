@@ -49,7 +49,7 @@ export function FormulaireNouveauBingo({
 
     let dateFin: Date | undefined;
     if (dateFinTexte !== '') {
-      const candidate = new Date(`${dateFinTexte}T23:59:59`);
+      const candidate = new Date(`${dateFinTexte}T23:59:59Z`); // 'Z' = UTC, indépendant du fuseau du navigateur
       if (candidate.getTime() <= Date.now()) {
         setErreur(t`La date de fin doit être dans le futur`);
         return;
@@ -91,8 +91,11 @@ export function FormulaireNouveauBingo({
         </legend>
         {genresDisponibles.map((g) => (
           <label key={g} className="formulaire-nouveau-bingo__genre-option">
+
             <input
               type="checkbox"
+              name="genres"
+              value={g}
               checked={genresSelectionnes.includes(g)}
               onChange={() => basculerGenre(g)}
             />

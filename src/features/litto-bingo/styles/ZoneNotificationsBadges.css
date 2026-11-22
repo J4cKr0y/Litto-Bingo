@@ -1,0 +1,58 @@
+/* Fichier : src/features/litto-bingo/styles/ZoneNotificationsBadges.css */
+
+.zone-notifications-badges {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-block-size: 70dvh;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.zone-notifications-badges > * {
+  pointer-events: auto;
+}
+
+.zone-notifications-badges__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.zone-notifications-badges__tout-fermer {
+  align-self: flex-end;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.15);
+}
+
+.zone-notifications-badges__tout-fermer:hover {
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-surface));
+}
+
+.zone-notifications-badges__tout-fermer:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .zone-notifications-badges {
+    inset-inline-start: auto;
+    inline-size: min(100%, 26rem);
+  }
+}

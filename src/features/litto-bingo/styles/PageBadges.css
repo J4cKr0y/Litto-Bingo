@@ -1,0 +1,85 @@
+/* Fichier : src/features/litto-bingo/styles/PageBadges.css */
+
+.page-badges {
+  inline-size: min(100%, 60rem);
+  min-block-size: 100vh;
+  margin-inline: auto;
+  padding: 1.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.page-badges__titre {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--color-text);
+}
+
+.page-badges__retour {
+  align-self: flex-start;
+  min-block-size: 2.75rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.page-badges__retour:hover {
+  background: color-mix(in srgb, var(--color-accent) 15%, var(--color-surface));
+}
+
+.page-badges__retour:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .page-badges {
+    padding: 2.5rem 1.5rem 4rem;
+    gap: 2rem;
+  }
+
+  .page-badges__titre {
+    font-size: 1.875rem;
+  }
+}
+
+/* Décor d'automne dans les marges, comme PageBingo (seuil plus haut : la page est plus large) */
+.page-badges::before,
+.page-badges::after {
+  content: '';
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background-image: url('../assets/decor-mosaique.svg');
+  background-repeat: repeat-y;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page-badges::before {
+  left: 0;
+}
+
+.page-badges::after {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+.page-badges > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 1400px) {
+  .page-badges::before,
+  .page-badges::after {
+    display: block;
+  }
+}

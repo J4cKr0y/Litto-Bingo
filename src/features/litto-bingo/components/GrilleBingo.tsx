@@ -2,7 +2,14 @@
 import { useState } from 'react';
 import { CaseBingo } from './CaseBingo';
 import { FormulaireLivre } from './FormulaireLivre';
-import { cocherCase, decocherCase, corrigerDerniereEntree, estExpire, type Grille } from '../litto-bingo';
+import {
+  cocherCase,
+  decocherCase,
+  corrigerDerniereEntree,
+  enregistrerPagesLivre,
+  estExpire,
+  type Grille,
+} from '../litto-bingo';
 import { obtenirTexteConsigneTraduit } from '../consignes-catalogue';
 import { t } from '@lingui/core/macro';
 import '../styles/GrilleBingo.css';
@@ -15,6 +22,7 @@ export interface GrilleBingoProps {
   positionsSelectionnees?: number[];
   onToggleSelection?: (position: number) => void;
   onChangerConsigne?: (position: number) => void;
+  verrouillee?: boolean;
 }
 
 export function GrilleBingo({
@@ -25,9 +33,11 @@ export function GrilleBingo({
   positionsSelectionnees = [],
   onToggleSelection,
   onChangerConsigne,
+  verrouillee = false,
 }: GrilleBingoProps) {
   const [positionOuverte, setPositionOuverte] = useState<number | null>(null);
   const expiree = estExpire(grille);
+  const figee = expiree || verrouillee;
 
   function texteAffiche(consigneId: string, texteOriginal: string): string {
     return obtenirTexteConsigneTraduit(consigneId, locale) ?? texteOriginal;
@@ -38,27 +48,36 @@ export function GrilleBingo({
       onToggleSelection?.(position);
       return;
     }
-    if (expiree) return;
+    if (figee) return;
     setPositionOuverte(position);
   }
 
-  function gererValidationLivre(livre: string) {
+  function appliquerPages(position: number, pages: number | null) {
+    if (pages !== null) {
+      enregistrerPagesLivre(grille, position, pages);
+    }
+  }
+
+  function gererValidationLivre(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     cocherCase(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }
 
-  function gererAjoutLecture(livre: string) {
+  function gererAjoutLecture(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     cocherCase(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }
 
-  function gererCorrection(livre: string) {
+  function gererCorrection(livre: string, pages: number | null) {
     if (positionOuverte === null) return;
     corrigerDerniereEntree(grille, positionOuverte, livre);
+    appliquerPages(positionOuverte, pages);
     onGrilleChangee({ ...grille });
     setPositionOuverte(null);
   }
@@ -93,7 +112,7 @@ export function GrilleBingo({
             consigneTexte={texteAffiche(c.consigne.id, c.consigne.texte)}
             cochee={c.cochee}
             livre={c.livre}
-            disabled={!modeSelection && expiree}
+            disabled={!modeSelection && figee}
             selectionnee={modeSelection && positionsSelectionnees.includes(position)}
             onCliquer={() => gererClicCase(position)}
           />

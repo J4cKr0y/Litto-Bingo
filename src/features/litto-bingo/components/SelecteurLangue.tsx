@@ -14,6 +14,7 @@ export function SelecteurLangue() {
   return (
     <select
       className="selecteur-langue"
+      name="langue"
       value={i18n.locale}
       onChange={gererChangement}
       aria-label={t`Langue de l'interface`}

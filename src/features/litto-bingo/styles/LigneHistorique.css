@@ -1,0 +1,44 @@
+.ligne-historique {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+}
+
+.ligne-historique__infos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ligne-historique__genres {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ligne-historique__details {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--color-text) 65%, transparent);
+}
+
+.ligne-historique__statut {
+  flex-shrink: 0;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ligne-historique__statut[data-statut="complete"] {
+  background: color-mix(in srgb, var(--color-accent-dark) 18%, var(--color-surface));
+  color: var(--color-accent-dark);
+}
+
+.ligne-historique__statut[data-statut="abandonne"] {
+  background: color-mix(in srgb, var(--color-error) 15%, var(--color-surface));
+  color: var(--color-error);
+}

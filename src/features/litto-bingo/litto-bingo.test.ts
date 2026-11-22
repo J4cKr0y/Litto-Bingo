@@ -1,3 +1,4 @@
+// src/features/litto-bingo/litto-bingo.test.ts
 import { describe, it, expect } from 'vitest';
 import {
   genererGrille,
@@ -7,6 +8,8 @@ import {
   verifierBingoComplet,
   definirDateDeFin,
   estExpire,
+  enregistrerPagesLivre,
+  remplacerConsigne,
 } from './litto-bingo';
 
 
@@ -240,5 +243,47 @@ describe('estExpire', () => {
     const resultat = estExpire(grille);
 
     expect(resultat).toBe(false);
+  });
+});
+//-----------------------------------------------------------------------------//
+describe('remplacerConsigne', () => {
+  it('incrémente le compteur cumulatif de cases renouvelées', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman', 40))!;
+
+    expect(grille.casesRenouveleesUtilisees).toBe(0);
+
+    remplacerConsigne(grille, 0, creerConsignes('c', 'roman', 40));
+
+    expect(grille.casesRenouveleesUtilisees).toBe(1);
+  });
+});
+//-----------------------------------------------------------------------------//
+describe('enregistrerPagesLivre', () => {
+  it('associe le nombre de pages à la dernière entrée de l\'historique', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    cocherCase(grille, 0, 'Dune');
+
+    enregistrerPagesLivre(grille, 0, 412);
+
+    const derniereEntree = grille.cases[0].historique[grille.cases[0].historique.length - 1];
+    expect(derniereEntree.pages).toBe(412);
+  });
+
+  it('rejette un nombre de pages négatif', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    cocherCase(grille, 0, 'Dune');
+
+    expect(() => enregistrerPagesLivre(grille, 0, -10)).toThrowError(
+      'Indique un nombre de pages valide'
+    );
+  });
+
+  it('rejette un nombre de pages égal à zéro (frontière tranchée : 0 est invalide)', () => {
+    const grille = genererGrille(creerConsignes('c', 'roman'))!;
+    cocherCase(grille, 0, 'Dune');
+
+    expect(() => enregistrerPagesLivre(grille, 0, 0)).toThrowError(
+      'Indique un nombre de pages valide'
+    );
   });
 });

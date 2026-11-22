@@ -10,4 +10,14 @@ export default defineConfig({
     lingui(),
   ],
   base: '/Litto-Bingo/',
+  optimizeDeps: {
+    include: ['react-dom/server'],
+  },
+  test: {
+    exclude: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.stryker-tmp/**',
+    ],
+  },
 });
