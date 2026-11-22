@@ -22,6 +22,7 @@ export interface GrilleBingoProps {
   positionsSelectionnees?: number[];
   onToggleSelection?: (position: number) => void;
   onChangerConsigne?: (position: number) => void;
+  verrouillee?: boolean;
 }
 
 export function GrilleBingo({
@@ -32,9 +33,11 @@ export function GrilleBingo({
   positionsSelectionnees = [],
   onToggleSelection,
   onChangerConsigne,
+  verrouillee = false,
 }: GrilleBingoProps) {
   const [positionOuverte, setPositionOuverte] = useState<number | null>(null);
   const expiree = estExpire(grille);
+  const figee = expiree || verrouillee;
 
   function texteAffiche(consigneId: string, texteOriginal: string): string {
     return obtenirTexteConsigneTraduit(consigneId, locale) ?? texteOriginal;
@@ -45,7 +48,7 @@ export function GrilleBingo({
       onToggleSelection?.(position);
       return;
     }
-    if (expiree) return;
+    if (figee) return;
     setPositionOuverte(position);
   }
 
@@ -109,7 +112,7 @@ export function GrilleBingo({
             consigneTexte={texteAffiche(c.consigne.id, c.consigne.texte)}
             cochee={c.cochee}
             livre={c.livre}
-            disabled={!modeSelection && expiree}
+            disabled={!modeSelection && figee}
             selectionnee={modeSelection && positionsSelectionnees.includes(position)}
             onCliquer={() => gererClicCase(position)}
           />

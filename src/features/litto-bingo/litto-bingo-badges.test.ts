@@ -2,8 +2,10 @@ import { describe, it, expect } from 'vitest';
 import type { BingoArchive } from './litto-bingo-archive';
 import {
   appliquerBadgesDebloques,
+  calculerAvancementBadge,
   calculerBadgesDebloques,
   estBadgeExportable,
+  familleBadge,
   marquerBadgeNotifie,
 } from './litto-bingo-badges';
 
@@ -985,5 +987,312 @@ describe('appliquerBadgesDebloques', () => {
 
     expect(apresSecondAppel.badgesDebloques).toHaveLength(2);
     expect(apresSecondAppel).toEqual(apresPremierAppel);
+  });
+});
+describe('familleBadge', () => {
+  it('classe un badge sans fenêtre parmi les badges permanents', () => {
+    expect(
+      familleBadge({ id: 'premier-pas', type: 'quantitatif', champ: 'bingosCompletes', seuil: 1 })
+    ).toBe('permanent');
+  });
+    it('classe un badge à fenêtre de saison parmi les badges de saison', () => {
+    expect(
+      familleBadge({
+        id: 'bourgeon',
+        type: 'quantitatif',
+        champ: 'bingosCompletes',
+        seuil: 1,
+        fenetre: { type: 'saison', debut: { mois: 3, jour: 20 }, fin: { mois: 6, jour: 20 } },
+      })
+    ).toBe('saisonnier');
+  });
+
+  it("classe un badge à fenêtre d'année civile parmi les Pionnier", () => {
+    expect(
+      familleBadge({
+        id: 'pionnier-2027',
+        type: 'quantitatif',
+        champ: 'bingosCompletes',
+        seuil: 1,
+        fenetre: { type: 'anneeCivile', annee: 2027 },
+      })
+    ).toBe('pionnier');
+  });
+
+  it("classe un exploit à fenêtre de saison parmi les badges de saison, pas parmi les permanents", () => {
+    expect(
+      familleBadge({
+        id: 'flocon-d-or',
+        type: 'exploit',
+        critere: 'casesRenouveleesMax',
+        seuil: 0,
+        fenetre: { type: 'saison', debut: { mois: 12, jour: 21 }, fin: { mois: 3, jour: 19 } },
+      })
+    ).toBe('saisonnier');
+  });
+
+  it('classe un exploit sans fenêtre parmi les badges permanents', () => {
+    expect(
+      familleBadge({ id: 'eclair', type: 'exploit', critere: 'dureeMaxMs', seuil: 604800000 })
+    ).toBe('permanent');
+  });
+});
+
+describe('calculerAvancementBadge', () => {
+  const DATE_ACTIVATION = new Date('2026-01-01T00:00:00Z');
+  const MAINTENANT = new Date('2027-05-15T12:00:00Z');
+  const ETE = {
+    type: 'saison',
+    debut: { mois: 6, jour: 21 },
+    fin: { mois: 9, jour: 22 },
+  } as const;
+  const HIVER = {
+    type: 'saison',
+    debut: { mois: 12, jour: 21 },
+    fin: { mois: 3, jour: 19 },
+  } as const;
+
+  it('ne calcule aucun avancement pour un exploit, qui se réussit ou non sans compteur', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'eclair', type: 'exploit', critere: 'dureeMaxMs', seuil: 604800000 },
+        archives: [creerArchive()],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toBeNull();
+  });
+  it('affiche 0 sur le seuil pour un badge quantitatif sans aucune archive', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'bibliophile', type: 'quantitatif', champ: 'bingosCompletes', seuil: 10 },
+        archives: [],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 0, seuil: 10 });
+  });
+  it('compte les bingos complétés pour un badge quantitatif', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'bibliophile', type: 'quantitatif', champ: 'bingosCompletes', seuil: 10 },
+        archives: [creerArchive(), creerArchive(), creerArchive()],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 3, seuil: 10 });
+  });
+  it("ne compte pas un bingo abandonné dans l'avancement", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'bibliophile', type: 'quantitatif', champ: 'bingosCompletes', seuil: 10 },
+        archives: [creerArchive(), creerArchive({ statut: 'abandonne', dureeMs: null })],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 1, seuil: 10 });
+  });
+  it("ne compte pas un bingo archivé avant l'activation des badges", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'bibliophile', type: 'quantitatif', champ: 'bingosCompletes', seuil: 10 },
+        archives: [creerArchive(), creerArchive({ dateArchivage: '2025-12-31T23:59:59.000Z' })],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 1, seuil: 10 });
+  });
+  it('compte les livres distincts, sans doublon entre archives', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'lecteur-curieux', type: 'quantitatif', champ: 'livresDistincts', seuil: 10 },
+        archives: [
+          creerArchive({ livresLus: ['Livre A', 'Livre B'] }),
+          creerArchive({ livresLus: ['Livre B', 'Livre C'] }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 3, seuil: 10 });
+  });
+
+  it('compte les genres distincts, sans doublon entre archives', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'explorateur', type: 'quantitatif', champ: 'genresDistincts', seuil: 5 },
+        archives: [
+          creerArchive({ genres: ['roman', 'policier'] }),
+          creerArchive({ genres: ['policier', 'manga'] }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 3, seuil: 5 });
+  });
+
+  it('compte les bingos qui contiennent au moins un des genres ciblés', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'reveil-litteraire',
+          type: 'quantitatif',
+          champ: 'bingosAvecGenre',
+          genres: ['romance', 'dark-romance'],
+          seuil: 1,
+        },
+        archives: [
+          creerArchive({ genres: ['policier', 'dark-romance'] }),
+          creerArchive({ genres: ['policier'] }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 1, seuil: 1 });
+  });
+
+  it('additionne les pages lues', () => {
+    expect(
+      calculerAvancementBadge({
+        badge: { id: 'montagne-de-pages', type: 'quantitatif', champ: 'pagesTotales', seuil: 5000 },
+        archives: [creerArchive({ pagesTotales: 300 }), creerArchive({ pagesTotales: 200 })],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 500, seuil: 5000 });
+  });
+
+  it("ne compte, pour un badge de saison, que les archives datées dans la saison", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'marathon-estival',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 2,
+          fenetre: ETE,
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2027-07-10T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2027-04-10T12:00:00.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2027-07-20T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 1, seuil: 2 });
+  });
+  it("affiche 0 pour un badge de saison quand la saison n'est pas en cours", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'marathon-estival',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 2,
+          fenetre: ETE,
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2027-07-10T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2027-08-20T12:00:00.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2027-12-25T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 0, seuil: 2 });
+  });
+  it("ne compte que l'occurrence en cours : deux étés différents ne s'additionnent pas", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'marathon-estival',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 2,
+          fenetre: ETE,
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2027-07-10T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2028-07-10T12:00:00.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2028-07-20T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 1, seuil: 2 });
+  });
+  it("traite l'hiver, à cheval sur deux années civiles, comme une seule occurrence", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'marathon-hivernal',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 3,
+          fenetre: HIVER,
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2026-12-25T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2027-12-25T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2028-01-10T12:00:00.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2028-02-01T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 2, seuil: 3 });
+  });
+
+  it("compte, pour un Pionnier, les bingos de l'année en cours seulement", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'pionnier-2027',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 1,
+          fenetre: { type: 'anneeCivile', annee: 2027 },
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2027-03-10T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2026-12-31T23:59:59.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: MAINTENANT,
+      })
+    ).toEqual({ valeur: 1, seuil: 1 });
+  });
+
+  it("affiche 0 pour le Pionnier d'une année passée, même si un bingo y a été complété", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'pionnier-2027',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 1,
+          fenetre: { type: 'anneeCivile', annee: 2027 },
+        },
+        archives: [creerArchive({ dateArchivage: '2027-06-10T12:00:00.000Z' })],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2028-01-15T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 0, seuil: 1 });
+  });
+
+  it("ne compte pas les bingos d'une autre année pour le Pionnier de l'année en cours", () => {
+    expect(
+      calculerAvancementBadge({
+        badge: {
+          id: 'pionnier-2028',
+          type: 'quantitatif',
+          champ: 'bingosCompletes',
+          seuil: 1,
+          fenetre: { type: 'anneeCivile', annee: 2028 },
+        },
+        archives: [
+          creerArchive({ dateArchivage: '2027-06-10T12:00:00.000Z' }),
+          creerArchive({ dateArchivage: '2028-02-10T12:00:00.000Z' }),
+        ],
+        dateActivationBadges: DATE_ACTIVATION,
+        maintenant: new Date('2028-05-15T12:00:00Z'),
+      })
+    ).toEqual({ valeur: 1, seuil: 1 });
   });
 });

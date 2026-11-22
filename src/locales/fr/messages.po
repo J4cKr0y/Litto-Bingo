@@ -13,6 +13,21 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. placeholder {0}: livres.length
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:44
+msgid "{0, plural, one {# livre distinct} other {# livres distincts}}"
+msgstr "{0, plural, one {# livre distinct} other {# livres distincts}}"
+
+#. placeholder {0}: bingo.livres.length
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:106
+msgid "{0, plural, one {# livre} other {# livres}}"
+msgstr "{0, plural, one {# livre} other {# livres}}"
+
+#. placeholder {0}: livre.nombreBingos
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:89
+msgid "{0, plural, one {Dans # bingo} other {Dans # bingos}}"
+msgstr "{0, plural, one {Dans # bingo} other {Dans # bingos}}"
+
 #. placeholder {0}: archive.casesCompletees
 #: src/features/litto-bingo/components/LigneHistorique.tsx:32
 msgid "{0} cases complétées"
@@ -48,19 +63,25 @@ msgstr "{jours, plural, one {# jour} other {# jours}}"
 msgid "{remplacementsRestants, plural, one {# changement restant} other {# changements restants}}"
 msgstr "{remplacementsRestants, plural, one {# changement restant} other {# changements restants}}"
 
-#: src/features/litto-bingo/components/PageHistorique.tsx:26
+#: src/features/litto-bingo/components/CarteBadge.tsx:67
+msgid "{valeurAffichee} sur {seuil}"
+msgstr "{valeurAffichee} sur {seuil}"
+
+#: src/features/litto-bingo/components/PageBadges.tsx:24
+#: src/features/litto-bingo/components/PageHistorique.tsx:34
 msgid "← Retour au bingo"
 msgstr "← Retour au bingo"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:264
+#: src/features/litto-bingo/components/PageBingo.tsx:380
 msgid "⏳ Ce bingo est arrivé à échéance."
 msgstr "⏳ Ce bingo est arrivé à échéance."
 
-#: src/features/litto-bingo/components/PageBingo.tsx:254
+#: src/features/litto-bingo/components/PageBingo.tsx:370
 msgid "🎉 Bingo complété ! Bravo pour cette belle pile de lectures."
 msgstr "🎉 Bingo complété ! Bravo pour cette belle pile de lectures."
 
 #: src/features/litto-bingo/components/LigneHistorique.tsx:37
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:105
 msgid "Abandonné"
 msgstr "Abandonné"
 
@@ -69,21 +90,70 @@ msgid "Ajouter une nouvelle lecture"
 msgstr "Ajouter une nouvelle lecture"
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:193
-#: src/features/litto-bingo/components/PageBingo.tsx:288
+#: src/features/litto-bingo/components/PageBingo.tsx:404
 msgid "Annuler"
 msgstr "Annuler"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:29
+msgid "Assidu"
+msgstr "Assidu"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:63
+msgid "Au coin du feu"
+msgstr "Au coin du feu"
+
+#: src/features/litto-bingo/components/ListeBadges.tsx:55
+msgid "Aucun badge pour l’instant : complète un bingo pour débloquer le premier !"
+msgstr "Aucun badge pour l’instant : complète un bingo pour débloquer le premier !"
 
 #: src/features/litto-bingo/components/ListeHistorique.tsx:19
 msgid "Aucun bingo dans votre historique pour l'instant."
 msgstr "Aucun bingo dans votre historique pour l'instant."
 
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:118
+msgid "Aucun livre enregistré pour ce bingo."
+msgstr "Aucun livre enregistré pour ce bingo."
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:34
+msgid "Aucun livre pour l’instant : complète un bingo pour commencer ta liste."
+msgstr "Aucun livre pour l’instant : complète un bingo pour commencer ta liste."
+
 #: src/features/litto-bingo/components/TableauStatistiques.tsx:28
 msgid "Aucune donnée disponible pour l'instant — complétez ou abandonnez un premier bingo pour voir vos statistiques."
 msgstr "Aucune donnée disponible pour l'instant — complétez ou abandonnez un premier bingo pour voir vos statistiques."
 
+#. placeholder {0}: notification.nom
+#: src/features/litto-bingo/components/ZoneNotificationsBadges.tsx:86
+msgid "Badge débloqué : {0}"
+msgstr "Badge débloqué : {0}"
+
+#: src/features/litto-bingo/components/NotificationBadge.tsx:36
+msgid "Badge débloqué !"
+msgstr "Badge débloqué !"
+
+#: src/features/litto-bingo/components/ListeBadges.tsx:37
+msgid "Badges de saison"
+msgstr "Badges de saison"
+
+#: src/features/litto-bingo/components/ListeBadges.tsx:51
+msgid "Badges débloqués : {debloques} sur {total}"
+msgstr "Badges débloqués : {debloques} sur {total}"
+
+#: src/features/litto-bingo/components/ListeBadges.tsx:35
+msgid "Badges permanents"
+msgstr "Badges permanents"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:31
+msgid "Bibliophile"
+msgstr "Bibliophile"
+
 #: src/features/litto-bingo/components/CompteARebours.tsx:41
 msgid "Bingo expiré"
 msgstr "Bingo expiré"
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:111
+msgid "Bingo n° {numero}"
+msgstr "Bingo n° {numero}"
 
 #: src/features/litto-bingo/components/TableauStatistiques.tsx:41
 msgid "Bingos abandonnés"
@@ -93,11 +163,15 @@ msgstr "Bingos abandonnés"
 msgid "Bingos réussis"
 msgstr "Bingos réussis"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:51
+msgid "Bourgeon"
+msgstr "Bourgeon"
+
 #: src/features/litto-bingo/components/TableauStatistiques.tsx:45
 msgid "Cases complétées"
 msgstr "Cases complétées"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:57
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:59
 msgid "Cases renouvelées"
 msgstr "Cases renouvelées"
 
@@ -105,31 +179,88 @@ msgstr "Cases renouvelées"
 msgid "Changer cette consigne"
 msgstr "Changer cette consigne"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:192
+#: src/features/litto-bingo/components/PageBingo.tsx:298
 msgid "Chargement de votre bingo..."
 msgstr "Chargement de votre bingo..."
 
 #. placeholder {0}: positionsSelectionnees.length
-#: src/features/litto-bingo/components/PageBingo.tsx:282
+#: src/features/litto-bingo/components/PageBingo.tsx:398
 msgid "Cliquez sur les cases à conserver ({0} sélectionnée(s))"
 msgstr "Cliquez sur les cases à conserver ({0} sélectionnée(s))"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:238
+#: src/features/litto-bingo/components/PageBingo.tsx:349
 msgid "Coche une case à chaque livre lu qui correspond à la consigne"
 msgstr "Coche une case à chaque livre lu qui correspond à la consigne"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:257
-#: src/features/litto-bingo/components/PageBingo.tsx:267
+#: src/features/litto-bingo/components/PageBingo.tsx:373
+#: src/features/litto-bingo/components/PageBingo.tsx:383
 msgid "Commencer un nouveau bingo"
 msgstr "Commencer un nouveau bingo"
 
 #: src/features/litto-bingo/components/LigneHistorique.tsx:37
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:105
 msgid "Complété"
 msgstr "Complété"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:31
+msgid "Complète 10 bingos."
+msgstr "Complète 10 bingos."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:57
+msgid "Complète 2 bingos pendant le même été."
+msgstr "Complète 2 bingos pendant le même été."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:33
+msgid "Complète 25 bingos."
+msgstr "Complète 25 bingos."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:29
+msgid "Complète 5 bingos."
+msgstr "Complète 5 bingos."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:53
+msgid "Complète au printemps un bingo contenant de la romance ou de la dark romance."
+msgstr "Complète au printemps un bingo contenant de la romance ou de la dark romance."
 
 #: src/features/litto-bingo/components/LigneHistorique.tsx:30
 msgid "complété en {duree} jours"
 msgstr "complété en {duree} jours"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:65
+msgid "Complète en hiver un bingo sans renouveler aucune consigne."
+msgstr "Complète en hiver un bingo sans renouveler aucune consigne."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:27
+msgid "Complète ton premier bingo."
+msgstr "Complète ton premier bingo."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:51
+msgid "Complète un bingo au printemps (20 mars – 20 juin)."
+msgstr "Complète un bingo au printemps (20 mars – 20 juin)."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:19
+msgid "Complète un bingo en {annee}."
+msgstr "Complète un bingo en {annee}."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:47
+msgid "Complète un bingo en 7 jours maximum."
+msgstr "Complète un bingo en 7 jours maximum."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:59
+msgid "Complète un bingo en automne (23 septembre – 20 décembre)."
+msgstr "Complète un bingo en automne (23 septembre – 20 décembre)."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:55
+msgid "Complète un bingo en été (21 juin – 22 septembre)."
+msgstr "Complète un bingo en été (21 juin – 22 septembre)."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:63
+msgid "Complète un bingo en hiver (21 décembre – 19 mars)."
+msgstr "Complète un bingo en hiver (21 décembre – 19 mars)."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:49
+msgid "Complète un bingo sans renouveler aucune consigne."
+msgstr "Complète un bingo sans renouveler aucune consigne."
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:204
 msgid "Corriger la dernière lecture"
@@ -139,9 +270,17 @@ msgstr "Corriger la dernière lecture"
 msgid "Créer votre bingo"
 msgstr "Créer votre bingo"
 
-#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:106
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:109
 msgid "Date de fin (optionnelle)"
 msgstr "Date de fin (optionnelle)"
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:18
+msgid "Date inconnue"
+msgstr "Date inconnue"
+
+#: src/features/litto-bingo/components/CarteBadge.tsx:60
+msgid "Débloqué"
+msgstr "Débloqué"
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:188
 msgid "Décocher"
@@ -151,23 +290,56 @@ msgstr "Décocher"
 msgid "Dites-nous ce que vous en pensez..."
 msgstr "Dites-nous ce que vous en pensez..."
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:47
+msgid "Éclair"
+msgstr "Éclair"
+
 #: src/features/litto-bingo/components/BoiteSuggestion.tsx:20
 msgid "Écrivez votre suggestion avant de l'envoyer"
 msgstr "Écrivez votre suggestion avant de l'envoyer"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:39
+msgid "Encyclopédie"
+msgstr "Encyclopédie"
 
 #: src/features/litto-bingo/components/BoiteSuggestion.tsx:55
 msgid "Envoyer par email"
 msgstr "Envoyer par email"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:275
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:41
+msgid "Explorateur"
+msgstr "Explorateur"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:61
+msgid "Explorateur brumeux"
+msgstr "Explorateur brumeux"
+
+#: src/features/litto-bingo/components/CarteBadge.tsx:80
+msgid "Exporter en image"
+msgstr "Exporter en image"
+
+#: src/features/litto-bingo/components/ModaleLivresLus.tsx:63
+#: src/features/litto-bingo/components/NotificationBadge.tsx:52
+msgid "Fermer"
+msgstr "Fermer"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:59
+msgid "Feuilles et chapitres"
+msgstr "Feuilles et chapitres"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:65
+msgid "Flocon d’or"
+msgstr "Flocon d’or"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:391
 msgid "Garder des cases pour le prochain bingo"
 msgstr "Garder des cases pour le prochain bingo"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:285
+#: src/features/litto-bingo/components/PageBingo.tsx:401
 msgid "Générer le nouveau bingo"
 msgstr "Générer le nouveau bingo"
 
-#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:125
+#: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:128
 msgid "Générer mon bingo"
 msgstr "Générer mon bingo"
 
@@ -175,11 +347,11 @@ msgstr "Générer mon bingo"
 #~ msgid "Genre"
 #~ msgstr "Genre"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:71
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:73
 msgid "Genre le plus lent"
 msgstr "Genre le plus lent"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:66
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:68
 msgid "Genre le plus rapide"
 msgstr "Genre le plus rapide"
 
@@ -187,8 +359,12 @@ msgstr "Genre le plus rapide"
 msgid "Genres (aucun coché = tous genres)"
 msgstr "Genres (aucun coché = tous genres)"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:37
+msgid "Grand lecteur"
+msgstr "Grand lecteur"
+
 #. placeholder {0}: grille.cases.length
-#: src/features/litto-bingo/components/GrilleBingo.tsx:102
+#: src/features/litto-bingo/components/GrilleBingo.tsx:105
 msgid "Grille de bingo littéraire, {0} cases"
 msgstr "Grille de bingo littéraire, {0} cases"
 
@@ -204,7 +380,7 @@ msgstr "Il reste {heureTexte}"
 msgid "Il reste {jourTexte} et {heureTexte}"
 msgstr "Il reste {jourTexte} et {heureTexte}"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:221
+#: src/features/litto-bingo/components/PageBingo.tsx:332
 msgid "Impossible de générer une grille : aucune consigne disponible pour ce filtre."
 msgstr "Impossible de générer une grille : aucune consigne disponible pour ce filtre."
 
@@ -216,29 +392,81 @@ msgstr "Indique le livre associé à cette case avant de la valider"
 msgid "Indique un nombre de pages valide"
 msgstr "Indique un nombre de pages valide"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:61
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:63
 msgid "Jours en moyenne par bingo"
 msgstr "Jours en moyenne par bingo"
+
+#: src/features/litto-bingo/components/CarteBadge.tsx:87
+msgid "L’export a échoué. Votre badge reste disponible, vous pouvez réessayer."
+msgstr "L’export a échoué. Votre badge reste disponible, vous pouvez réessayer."
 
 #: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:54
 msgid "La date de fin doit être dans le futur"
 msgstr "La date de fin doit être dans le futur"
 
-#: src/features/litto-bingo/components/SelecteurLangue.tsx:19
+#: src/features/litto-bingo/components/SelecteurLangue.tsx:20
 msgid "Langue de l'interface"
 msgstr "Langue de l'interface"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:35
+msgid "Lecteur curieux"
+msgstr "Lecteur curieux"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:55
+msgid "Lecteur de plage"
+msgstr "Lecteur de plage"
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:106
 msgid "Lectures précédentes"
 msgstr "Lectures précédentes"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:33
+msgid "Légende"
+msgstr "Légende"
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:49
+msgid "Les titres signalés comme proches ne diffèrent que par la casse, les accents ou les espaces. Ils comptent comme des livres distincts."
+msgstr "Les titres signalés comme proches ne diffèrent que par la casse, les accents ou les espaces. Ils comptent comme des livres distincts."
+
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:175
 msgid "Limite de changements atteinte pour cette grille"
 msgstr "Limite de changements atteinte pour cette grille"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:35
+msgid "Lis 10 livres différents."
+msgstr "Lis 10 livres différents."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:39
+msgid "Lis 100 livres différents."
+msgstr "Lis 100 livres différents."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:45
+msgid "Lis 5 000 pages au total."
+msgstr "Lis 5 000 pages au total."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:41
+msgid "Lis 5 genres différents."
+msgstr "Lis 5 genres différents."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:37
+msgid "Lis 50 livres différents."
+msgstr "Lis 50 livres différents."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:61
+msgid "Lis au moins 3 genres différents pendant le même automne."
+msgstr "Lis au moins 3 genres différents pendant le même automne."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:43
+msgid "Lis tous les genres du catalogue."
+msgstr "Lis tous les genres du catalogue."
+
 #: src/features/litto-bingo/components/TableauStatistiques.tsx:49
 msgid "Livres distincts lus"
 msgstr "Livres distincts lus"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:57
+msgid "Marathon estival"
+msgstr "Marathon estival"
 
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:119
 #~ msgid "Mettre à jour"
@@ -248,34 +476,75 @@ msgstr "Livres distincts lus"
 msgid "Modifier cette case"
 msgstr "Modifier cette case"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:45
+msgid "Montagne de pages"
+msgstr "Montagne de pages"
+
 #: src/features/litto-bingo/components/FormulaireLivre.tsx:137
 msgid "Nombre de pages (optionnel)"
 msgstr "Nombre de pages (optionnel)"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:307
+#: src/features/litto-bingo/components/PageBingo.tsx:424
 msgid "Nouveau bingo"
 msgstr "Nouveau bingo"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:53
+#: src/features/litto-bingo/components/ZoneNotificationsBadges.tsx:91
+msgid "Nouveaux badges"
+msgstr "Nouveaux badges"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:55
 msgid "Pages lues"
 msgstr "Pages lues"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:67
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:72
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:78
+msgid "Par bingo"
+msgstr "Par bingo"
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:68
+msgid "Par ordre alphabétique"
+msgstr "Par ordre alphabétique"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:69
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:74
 msgid "Pas encore assez de données"
 msgstr "Pas encore assez de données"
 
-#: src/features/litto-bingo/components/TableauStatistiques.tsx:62
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:64
 msgid "Pas encore de bingo complété"
 msgstr "Pas encore de bingo complété"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:245
+#: src/features/litto-bingo/components/PageBingo.tsx:361
 msgid "Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible."
 msgstr "Peu de consignes disponibles pour ce filtre — la grille a été complétée du mieux possible."
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:18
+msgid "Pionnier {annee}"
+msgstr "Pionnier {annee}"
+
+#: src/features/litto-bingo/components/ListeBadges.tsx:39
+msgid "Pionnier de l’année"
+msgstr "Pionnier de l’année"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:27
+msgid "Premier pas"
+msgstr "Premier pas"
+
+#. placeholder {0}: listerProches(livre.similaires)
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:94
+msgid "Proche de : {0}"
+msgstr "Proche de : {0}"
 
 #: src/features/litto-bingo/components/BarreProgression.tsx:30
 msgid "Progression du bingo : {casesTexte} sur {casesTotal} complétées"
 msgstr "Progression du bingo : {casesTexte} sur {casesTotal} complétées"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:53
+msgid "Réveil littéraire"
+msgstr "Réveil littéraire"
+
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:49
+msgid "Sans filet"
+msgstr "Sans filet"
 
 #: src/features/litto-bingo/components/FormulaireNouveauBingo.tsx:75
 msgid "Taille de la grille"
@@ -285,15 +554,27 @@ msgstr "Taille de la grille"
 msgid "Titre du livre lu"
 msgstr "Titre du livre lu"
 
+#: src/features/litto-bingo/litto-bingo-badges-presentation.ts:43
+msgid "Tour du monde"
+msgstr "Tour du monde"
+
 #: src/features/litto-bingo/components/LigneHistorique.tsx:20
 msgid "Tous genres"
 msgstr "Tous genres"
+
+#: src/features/litto-bingo/components/ZoneNotificationsBadges.tsx:98
+msgid "Tout fermer"
+msgstr "Tout fermer"
+
+#: src/features/litto-bingo/components/ListeLivresLus.tsx:58
+msgid "Trier les livres"
+msgstr "Trier les livres"
 
 #: src/features/litto-bingo/components/PageBingo.tsx:145
 #~ msgid "Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?"
 #~ msgstr "Un nouveau bingo remplacera définitivement celui en cours (pas encore d'historique). Continuer ?"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:124
+#: src/features/litto-bingo/components/PageBingo.tsx:182
 msgid "Un nouveau bingo remplacera définitivement celui en cours. Il sera archivé comme abandonné. Continuer ?"
 msgstr "Un nouveau bingo remplacera définitivement celui en cours. Il sera archivé comme abandonné. Continuer ?"
 
@@ -309,12 +590,34 @@ msgstr "Valider"
 msgid "Valider cette case"
 msgstr "Valider cette case"
 
-#: src/features/litto-bingo/components/PageBingo.tsx:206
-#: src/features/litto-bingo/components/PageBingo.tsx:241
+#: src/features/litto-bingo/components/CarteBadge.tsx:60
+msgid "Verrouillé"
+msgstr "Verrouillé"
+
+#: src/features/litto-bingo/components/TableauStatistiques.tsx:51
+msgid "Voir la liste"
+msgstr "Voir la liste"
+
+#: src/features/litto-bingo/components/NotificationBadge.tsx:48
+#: src/features/litto-bingo/components/PageBingo.tsx:316
+#: src/features/litto-bingo/components/PageBingo.tsx:356
+msgid "Voir mes badges"
+msgstr "Voir mes badges"
+
+#: src/features/litto-bingo/components/PageBingo.tsx:313
+#: src/features/litto-bingo/components/PageBingo.tsx:353
 msgid "Voir mon historique"
 msgstr "Voir mon historique"
 
-#: src/features/litto-bingo/components/PageHistorique.tsx:22
+#: src/features/litto-bingo/components/PageBadges.tsx:20
+msgid "Vos badges"
+msgstr "Vos badges"
+
+#: src/features/litto-bingo/components/ModaleLivresLus.tsx:56
+msgid "Vos livres lus"
+msgstr "Vos livres lus"
+
+#: src/features/litto-bingo/components/PageHistorique.tsx:30
 msgid "Votre historique de lecture"
 msgstr "Votre historique de lecture"
 

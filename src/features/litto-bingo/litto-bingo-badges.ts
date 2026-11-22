@@ -167,17 +167,24 @@ function estBadgeAtteint(badge: DefinitionBadge, archives: BingoArchive[]): bool
   return calculerProgression(archivesPertinentes, badge) >= badge.seuil;
 }
 
+function archivesComptabilisables(
+  archives: BingoArchive[],
+  dateActivationBadges: Date
+): BingoArchive[] {
+  return archives.filter(
+    (a) =>
+      a.statut === 'complete' &&
+      new Date(a.dateArchivage).getTime() >= dateActivationBadges.getTime()
+  );
+}
+
 export function calculerBadgesDebloques({
   archives,
   catalogue,
   dateActivationBadges,
   progressionActuelle,
 }: ParamsCalculBadges): BadgeDebloque[] {
-  const archivesCompteesDepuisActivation = archives.filter(
-    (a) =>
-      a.statut === 'complete' &&
-      new Date(a.dateArchivage).getTime() >= dateActivationBadges.getTime()
-  );
+    const archivesCompteesDepuisActivation = archivesComptabilisables(archives, dateActivationBadges);
 
   const idsDejaDebloques = new Set(progressionActuelle.badgesDebloques.map((b) => b.id));
 
@@ -217,4 +224,61 @@ export function appliquerBadgesDebloques(
       ...nouveaux.filter((b) => !idsExistants.has(b.id)),
     ],
   };
+}
+
+export type FamilleBadge = 'permanent' | 'saisonnier' | 'pionnier';
+
+export function familleBadge(badge: DefinitionBadge): FamilleBadge {
+  switch (badge.fenetre?.type) {
+    case 'saison':
+      return 'saisonnier';
+    case 'anneeCivile':
+      return 'pionnier';
+    default:
+      return 'permanent';
+  }
+}
+
+export interface AvancementBadge {
+  valeur: number;
+  seuil: number;
+}
+
+export interface ParamsAvancementBadge {
+  badge: DefinitionBadge;
+  archives: BingoArchive[];
+  dateActivationBadges: Date;
+  /** La date du jour, fournie par l'appelant : le domaine ne lit jamais l'horloge. */
+  maintenant: Date;
+}
+
+export function calculerAvancementBadge({
+  badge,
+  archives,
+  dateActivationBadges,
+  maintenant,
+}: ParamsAvancementBadge): AvancementBadge | null {
+  if (badge.type === 'exploit') return null;
+
+  const fenetre = badge.fenetre;
+
+  // Décision B : l'avancement reflète l'occurrence en cours, donc 0 hors de la fenêtre.
+  if (fenetre && !estDansFenetre(maintenant, fenetre)) {
+    return { valeur: 0, seuil: badge.seuil };
+  }
+
+  let retenues = archivesDansFenetre(
+    archivesComptabilisables(archives, dateActivationBadges),
+    badge
+  );
+
+  // Une saison revient chaque année : seules comptent les archives de l'occurrence en cours.
+  if (fenetre?.type === 'saison') {
+    const occurrenceCourante = cleOccurrence(maintenant, fenetre);
+    retenues = retenues.filter(
+      (a) => cleOccurrence(new Date(a.dateArchivage), fenetre) === occurrenceCourante
+    );
+  }
+
+  return { valeur: calculerProgression(retenues, badge), seuil: badge.seuil };
 }

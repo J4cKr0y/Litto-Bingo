@@ -91,8 +91,11 @@ export function FormulaireNouveauBingo({
         </legend>
         {genresDisponibles.map((g) => (
           <label key={g} className="formulaire-nouveau-bingo__genre-option">
+
             <input
               type="checkbox"
+              name="genres"
+              value={g}
               checked={genresSelectionnes.includes(g)}
               onChange={() => basculerGenre(g)}
             />

@@ -5,8 +5,8 @@ import type { BadgeDebloque, ProgressionBadges } from './litto-bingo-badges';
 const CLE_STOCKAGE = 'litto-bingo:badges';
 
 export interface ProgressionBadgesRepository {
-  charger(): ProgressionBadges;
-  sauvegarder(progression: ProgressionBadges): void;
+  charger(): Promise<ProgressionBadges>;
+  sauvegarder(progression: ProgressionBadges): Promise<void>;
 }
 
 export interface ProgressionBadgesPersistee {
@@ -41,7 +41,7 @@ function versProgressionPersistee(progression: ProgressionBadges): ProgressionBa
 }
 
 export class LocalStorageProgressionBadgesRepository implements ProgressionBadgesRepository {
-  charger(): ProgressionBadges {
+  async charger(): Promise<ProgressionBadges> {
     try {
       const contenu = localStorage.getItem(CLE_STOCKAGE);
       if (contenu === null) return { badgesDebloques: [] };
@@ -51,7 +51,7 @@ export class LocalStorageProgressionBadgesRepository implements ProgressionBadge
     }
   }
 
-  sauvegarder(progression: ProgressionBadges): void {
+  async sauvegarder(progression: ProgressionBadges): Promise<void> {
     localStorage.setItem(CLE_STOCKAGE, JSON.stringify(versProgressionPersistee(progression)));
   }
 }

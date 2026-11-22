@@ -1,5 +1,3 @@
-// Fichier : src/features/litto-bingo/components/TableauStatistiques.tsx
-
 import { Trans } from '@lingui/react/macro';
 import { t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
@@ -9,6 +7,8 @@ import '../styles/TableauStatistiques.css';
 
 export interface TableauStatistiquesProps {
   statistiques: Statistiques;
+  /** Quand il est fourni, la carte « Livres distincts lus » devient cliquable. */
+  onVoirLivres?: () => void;
 }
 
 function formaterDureeMoyenne(ms: number | null): string | null {
@@ -17,7 +17,7 @@ function formaterDureeMoyenne(ms: number | null): string | null {
   return String(jours);
 }
 
-export function TableauStatistiques({ statistiques }: TableauStatistiquesProps) {
+export function TableauStatistiques({ statistiques, onVoirLivres }: TableauStatistiquesProps) {
   useLingui();
 
   const totalBingos = statistiques.totalBingosCompletes + statistiques.totalBingosAbandonnes;
@@ -47,6 +47,8 @@ export function TableauStatistiques({ statistiques }: TableauStatistiquesProps) 
       <CarteStatistique
         valeur={statistiques.totalLivresDistincts}
         libelle={t`Livres distincts lus`}
+        onActiver={onVoirLivres}
+        libelleAction={onVoirLivres ? t`Voir la liste` : undefined}
       />
       <CarteStatistique
         valeur={statistiques.totalPagesLues}

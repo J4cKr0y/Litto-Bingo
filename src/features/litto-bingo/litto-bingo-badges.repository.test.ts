@@ -7,13 +7,13 @@ describe('LocalStorageProgressionBadgesRepository', () => {
     localStorage.clear();
   });
 
-  it('retourne une progression vide quand rien n\'est stocké', () => {
+  it("retourne une progression vide quand rien n'est stocké", async () => {
     const repository = new LocalStorageProgressionBadgesRepository();
 
-    expect(repository.charger()).toEqual({ badgesDebloques: [] });
+    expect(await repository.charger()).toEqual({ badgesDebloques: [] });
   });
 
-  it('retrouve la progression sauvegardée, même avec une nouvelle instance', () => {
+  it('retrouve la progression sauvegardée, même avec une nouvelle instance', async () => {
     const progression = {
       badgesDebloques: [
         { id: 'premier-pas', notifie: true },
@@ -21,13 +21,13 @@ describe('LocalStorageProgressionBadgesRepository', () => {
       ],
     };
 
-    new LocalStorageProgressionBadgesRepository().sauvegarder(progression);
+    await new LocalStorageProgressionBadgesRepository().sauvegarder(progression);
 
-    expect(new LocalStorageProgressionBadgesRepository().charger()).toEqual(progression);
+    expect(await new LocalStorageProgressionBadgesRepository().charger()).toEqual(progression);
   });
 
-  it('écrit le format versionné sous la clé litto-bingo:badges', () => {
-    new LocalStorageProgressionBadgesRepository().sauvegarder({
+  it('écrit le format versionné sous la clé litto-bingo:badges', async () => {
+    await new LocalStorageProgressionBadgesRepository().sauvegarder({
       badgesDebloques: [{ id: 'eclair', notifie: false }],
     });
 
@@ -39,16 +39,16 @@ describe('LocalStorageProgressionBadgesRepository', () => {
 
   it.each(['pas du json{', '{"x":1}', '[]', 'null'])(
     'retourne une progression vide quand le contenu stocké est inexploitable (%s)',
-    (contenu) => {
+    async (contenu) => {
       localStorage.setItem('litto-bingo:badges', contenu);
 
-      expect(new LocalStorageProgressionBadgesRepository().charger()).toEqual({
+      expect(await new LocalStorageProgressionBadgesRepository().charger()).toEqual({
         badgesDebloques: [],
       });
     }
   );
 
-  it('ignore les entrées invalides et conserve les valides', () => {
+  it('ignore les entrées invalides et conserve les valides', async () => {
     localStorage.setItem(
       'litto-bingo:badges',
       JSON.stringify({
@@ -64,7 +64,7 @@ describe('LocalStorageProgressionBadgesRepository', () => {
       })
     );
 
-    expect(new LocalStorageProgressionBadgesRepository().charger()).toEqual({
+    expect(await new LocalStorageProgressionBadgesRepository().charger()).toEqual({
       badgesDebloques: [
         { id: 'assidu', notifie: true },
         { id: 'bourgeon', notifie: false },

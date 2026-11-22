@@ -24,3 +24,31 @@
   font-size: 0.8rem;
   color: color-mix(in srgb, var(--color-text) 70%, transparent);
 }
+
+.carte-statistique--cliquable {
+  inline-size: 100%;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.carte-statistique--cliquable:hover {
+  border-color: var(--color-accent-dark);
+  background: color-mix(in srgb, var(--color-accent) 12%, var(--color-surface));
+}
+
+.carte-statistique--cliquable:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.carte-statistique__action {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-accent-dark);
+}
+
+.carte-statistique__action::after {
+  content: ' ›';
+  content: ' ›' / ''; /* texte alternatif vide : décoratif pour les lecteurs d'écran */
+}
